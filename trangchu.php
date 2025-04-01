@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Website bán sản phẩm giữ nhiệt BAĐ</title>
+    <title>Website bán phụ kiện điện thoại BCB</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -49,7 +49,7 @@
             <div class="hero-slider-active slick-arrow-style slick-arrow-style_hero slick-dot-style">
                 <!-- single slider item start -->
                 <div class="hero-single-slide hero-overlay">
-                    <div class="hero-slider-item bg-img" data-bg="assets/img/slider/bancoc1.jpg">
+                    <div class="hero-slider-item bg-img" data-bg="assets/img/slider/banner1.jpg">
 
                     </div>
                 </div>
@@ -57,7 +57,7 @@
 
                 <!-- single slider item start -->
                 <div class="hero-single-slide hero-overlay">
-                    <div class="hero-slider-item bg-img" data-bg="assets/img/slider/bancoc2.jpg">
+                    <div class="hero-slider-item bg-img" data-bg="assets/img/slider/banner2.jpg">
 
                     </div>
                 </div>
@@ -65,7 +65,7 @@
 
                 <!-- single slider item start -->
                 <div class="hero-single-slide hero-overlay">
-                    <div class="hero-slider-item bg-img" data-bg="assets/img/slider/bancoc3.jpg">
+                    <div class="hero-slider-item bg-img" data-bg="assets/img/slider/banner3.jpg">
 
                     </div>
                 </div>
@@ -134,7 +134,7 @@
                     <div class="col-sm-6">
                         <figure class="banner-statistics mt-20">
                             <a href="#">
-                                <img src="assets/img/banner/bancoc4.png" alt="product banner">
+                                <img src="assets/img/banner/banner4.jpg" alt="product banner">
                             </a>
 
                         </figure>
@@ -142,7 +142,7 @@
                     <div class="col-sm-6">
                         <figure class="banner-statistics mt-20">
                             <a href="#">
-                                <img src="assets/img/banner/bancoc5.png" alt="product banner">
+                                <img src="assets/img/banner/banner2.jpg" alt="product banner">
                             </a>
 
                         </figure>
@@ -150,7 +150,7 @@
                     <div class="col-sm-6">
                         <figure class="banner-statistics mt-20">
                             <a href="#">
-                                <img src="assets/img/banner/bancoc1.png" alt="product banner">
+                                <img src="assets/img/banner/banner1.jpg" alt="product banner">
                             </a>
 
                         </figure>
@@ -158,7 +158,7 @@
                     <div class="col-sm-6">
                         <figure class="banner-statistics mt-20">
                             <a href="#">
-                                <img src="assets/img/banner/bancoc3.png" alt="product banner">
+                                <img src="assets/img/banner/banner3.jpg" alt="product banner">
                             </a>
 
                         </figure>
@@ -231,7 +231,7 @@
                             <div class="banner-slide-item">
                                 <figure class="banner-statistics">
                                     <a href="#">
-                                        <img src="assets/img/banner/bancoc1.png" alt="product banner">
+                                        <img src="assets/img/banner/banner1.jpg" alt="product banner">
                                     </a>
 
                                 </figure>
@@ -241,7 +241,7 @@
                             <div class="banner-slide-item">
                                 <figure class="banner-statistics">
                                     <a href="#">
-                                        <img src="assets/img/banner/bancoc2.png" alt="product banner">
+                                        <img src="assets/img/banner/banner2.jpg" alt="product banner">
                                     </a>
 
                                 </figure>
@@ -251,32 +251,19 @@
                             <div class="banner-slide-item">
                                 <figure class="banner-statistics">
                                     <a href="#">
-                                        <img src="assets/img/banner/bancoc3.png" alt="product banner">
+                                        <img src="assets/img/banner/banner3.jpg" alt="product banner">
                                     </a>
 
                                 </figure>
                             </div>
-                            <!-- banner single slide start -->
-                            <!-- banner single slide start -->
                             <div class="banner-slide-item">
                                 <figure class="banner-statistics">
                                     <a href="#">
-                                        <img src="assets/img/banner/bancoc4.png" alt="product banner">
+                                        <img src="assets/img/banner/banner4.jpg" alt="product banner">
                                     </a>
 
                                 </figure>
                             </div>
-                            <!-- banner single slide start -->
-                            <!-- banner single slide start -->
-                            <div class="banner-slide-item">
-                                <figure class="banner-statistics">
-                                    <a href="#">
-                                        <img src="assets/img/banner/bancoc5.png" alt="product banner">
-                                    </a>
-
-                                </figure>
-                            </div>
-                            <!-- banner single slide start -->
                         </div>
                     </div>
                 </div>

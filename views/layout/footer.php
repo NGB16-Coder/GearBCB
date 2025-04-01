@@ -7,7 +7,7 @@
                             <div class="widget-title">
                                 <div class="widget-logo">
                                     <a href="<?= BASE_URL ?>">
-                                        <img src="assets/img/logo/logo-bad-cut-removebg.png" alt="brand logo">
+                                        <img src="assets/img/logo/logo.png" alt="brand logo">
                                     </a>
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="copyright-text text-center">
-                            <p>&copy; 2024 <b>BAĐ</b> Made with <i class="fa fa-heart text-danger"></i> by <a href="https://hasthemes.com/"><b>Bảo</b></a></p>
+                            <p>&copy; 2025 <b>BCB</b> Made with <i class="fa fa-heart text-danger"></i> by <a href="https://hasthemes.com/"><b>Bảo</b></a></p>
                         </div>
                     </div>
                 </div>

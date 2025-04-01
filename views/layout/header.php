@@ -7,7 +7,7 @@
                 <div class="row justify-content-center align-items-center">
 
                     <div class="welcome-message text-center">
-                        <strong>Chào mừng đến Website Bán Sản Phẩm Giữ Nhiệt BAĐ</strong>
+                        <strong>Chào Mừng Đến Website Bán Phụ Kiện Điện Thoại BCB</strong>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                     <div class="col-lg-2">
                         <div class="logo">
                             <a href="<?= BASE_URL ?>">
-                                <img src="assets/img/logo/logo-bad-cut-removebg.png" alt="Brand Logo">
+                                <img src="assets/img/logo/logo.png" alt="Brand Logo" style="max-width:300px;">
                             </a>
                         </div>
                     </div>
@@ -49,7 +49,9 @@
                                 <button class="search-trigger d-xl-none d-lg-block"><i
                                         class="pe-7s-search"></i></button>
                                 <form class="header-search-box d-lg-none d-xl-block" role="search" method="post">
-                                    <input type="search" name="search" value="<?= $_POST['search'] ?? "" ?>" placeholder="Tìm kiếm sản phẩm" class="header-search-field">
+                                    <input type="search" name="search"
+                                        value="<?= $_POST['search'] ?? "" ?>"
+                                        placeholder="Tìm kiếm sản phẩm" class="header-search-field">
                                     <button class="header-search-btn"><i class="pe-7s-search"></i></button>
                                 </form>
                             </div>
@@ -64,8 +66,8 @@
                                                 <?php if (isset($_SESSION['taikhoan'])) { ?>
                                                 <p><span style="font-weight: 600;">Acc:
                                                     </span>
-                                                    <a
-                                                        style="font-size: 11px;" href="<?= BASE_URL.'?act=info-Acc&id='.$tk_id ?>"><?=$_SESSION['taikhoan']?></a>
+                                                    <a style="font-size: 11px;"
+                                                        href="<?= BASE_URL.'?act=info-Acc&id='.$tk_id ?>"><?=$_SESSION['taikhoan']?></a>
 
                                                 </p>
                                                 <br>
@@ -129,7 +131,7 @@
                     <div class="mobile-main-header">
                         <div class="mobile-logo">
                             <a href="<?= BASE_URL ?>">
-                                <img src="assets/img/logo/logo-bad-cut-removebg.png" alt="Brand Logo">
+                                <img src="assets/img/logo/logo.png" alt="Brand Logo">
                             </a>
                         </div>
                         <div class="mobile-menu-toggler">
