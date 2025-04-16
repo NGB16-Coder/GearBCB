@@ -41,14 +41,8 @@
                             action="<?= BASE_URL_ADMIN .'?act=editProduct' ?>"
                             method="post" enctype="multipart/form-data">
                             <div class="card-body row">
-                                <input type="number" name="spbt_id"
-                                    value="<?=$product['spbt_id']?>"
-                                    readonly hidden>
                                 <input type="number" name="sp_id"
                                     value="<?=$product['sp_id']?>"
-                                    readonly hidden>
-                                <input type="number" name="size_id"
-                                    value="<?=$product['size_id']?>"
                                     readonly hidden>
                                 <!-- Tên sản phẩm -->
                                 <div class="form-group col-12">
@@ -131,7 +125,7 @@
                                 <div class="mb-3 col-6">
                                     <div>
                                         <?php
-                                            $img_sp = $this->modelProduct->getDetailProduct($spbt_id);
+                                            $img_sp = $this->modelProduct->getDetailProduct($sp_id);
 if (!empty($img_sp['img_sp'])):?>
                                         <img src="../<?= $img_sp['img_sp']?>"
                                             alt="Không có ảnh" style="max-width: 80px; height: auto;">

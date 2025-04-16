@@ -42,7 +42,7 @@ class AdminCommentController
     {
         // Lấy tất cả bình luận
         $sp_id = $_GET['sp_id'] ?? null; // Lấy ID sản phẩm từ URL (nếu có)
-        $listComment = $this->modelcomment->getAllComment($sp_id); // Truyền ID sản phẩm để lọc
+        $listComment = $this->modelcomment->getAllComments(); // Truyền ID sản phẩm để lọc
     
         // Gọi view hiển thị danh sách bình luận
         require_once "./views/manageComment/listComment.php";

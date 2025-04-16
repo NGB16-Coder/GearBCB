@@ -34,7 +34,20 @@
     <link rel="stylesheet" href="assets/css/plugins/jqueryui.min.css">
     <!-- main style css -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        a,
+        a:hover {
+            text-decoration: none;
+        }
 
+        .product-item:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+    </style>
 </head>
 
 <body>
@@ -68,7 +81,9 @@
         <!-- checkout main wrapper start -->
         <div class="checkout-page-wrapper section-padding">
             <div class="container">
-                <form action="<?= BASE_URL . '?act=xac-nhan-don&id='.$tk_id ?>" method="post">
+                <form
+                    action="<?= BASE_URL . '?act=xac-nhan-don&id='.$tk_id ?>"
+                    method="post">
                     <div class="row">
                         <!-- Checkout Billing Details -->
                         <div class="col-lg-6">
@@ -113,13 +128,16 @@
                                         </div>
                                         <div class="ship-to-different single-form-row">
                                             <div class="single-input-item">
-                                                <input type="text" placeholder="Tên người nhận" name="ten_nhan" value="">
+                                                <input type="text" placeholder="Tên người nhận" name="ten_nhan"
+                                                    value="">
                                             </div>
                                             <div class="single-input-item">
-                                                <input type="text" placeholder="Số điện thoại người nhận" name="sdt_nhan" value="">
+                                                <input type="text" placeholder="Số điện thoại người nhận"
+                                                    name="sdt_nhan" value="">
                                             </div>
                                             <div class="single-input-item">
-                                                <input type="text" placeholder="Địa chỉ người nhận" name="dia_chi_nhan" value="">
+                                                <input type="text" placeholder="Địa chỉ người nhận" name="dia_chi_nhan"
+                                                    value="">
                                             </div>
                                         </div>
                                     </div>
@@ -139,7 +157,6 @@
                                                 <tr>
                                                     <th><b>Tên sản phẩm</b></th>
                                                     <th><b>Số lượng</b></th>
-                                                    <th><b>Size</b></th>
                                                     <th><b>Giá</b></th>
                                                     <th><b>Tổng</b></th>
                                                 </tr>
@@ -147,24 +164,27 @@
                                             <tbody>
                                                 <?php
                                                         $tongTien = 0;
-                            foreach ($selectedItems as $item):
-                                $thanhTien = $item['km_sp'] * $item['so_luong'];
-                                $tongTien += $thanhTien;
-                                ?>
+    foreach ($selectedItems as $item):
+        $thanhTien = $item['km_sp'] * $item['so_luong'];
+        $tongTien += $thanhTien;
+        ?>
                                                 <tr>
                                                     <td><?= $item['ten_sp'] ?>
                                                     </td>
                                                     <td><?= $item['so_luong'] ?>
                                                     </td>
-                                                    <td><?= $item['size_value'] ?>
-                                                    </td>
                                                     <td><?= number_format($item['km_sp']) ?>₫
                                                     </td>
                                                     <td><?= number_format($thanhTien) ?>₫
                                                     </td>
-                                                    <input type="hidden" name="select-product[]" value="<?= $item['id'] ?>">
-                                    <input type="hidden" name="product-quantity[<?= $item['id'] ?>]" value="<?= $item['so_luong'] ?>">
-                                    <input type="hidden" name="product-price[<?= $item['id'] ?>]" value="<?= $item['km_sp'] ?>">
+                                                    <input type="hidden" name="select-product[]"
+                                                        value="<?= $item['id'] ?>">
+                                                    <input type="hidden"
+                                                        name="product-quantity[<?= $item['id'] ?>]"
+                                                        value="<?= $item['so_luong'] ?>">
+                                                    <input type="hidden"
+                                                        name="product-price[<?= $item['id'] ?>]"
+                                                        value="<?= $item['km_sp'] ?>">
                                                 </tr>
                                                 <?php endforeach; ?>
                                             </tbody>
@@ -173,13 +193,15 @@
                                                     <td colspan="4" style="text-align:right; font-size: 1.2vw;"><b>Tổng
                                                             tiền:</b>
                                                     </td>
-                                                    <td><strong style="font-size: 1.2vw; font-weight:700;color:green"><?= number_format($tongTien) ?>₫</strong>
+                                                    <td><strong
+                                                            style="font-size: 1.2vw; font-weight:700;color:green"><?= number_format($tongTien) ?>₫</strong>
                                                     </td>
                                                 </tr>
                                             </tfoot>
                                         </table>
                                     </div>
-                                    <input type="hidden" name="total_amount" value="<?= $tongTien ?>">
+                                    <input type="hidden" name="total_amount"
+                                        value="<?= $tongTien ?>">
                                     <!-- Order Payment Method -->
                                     <div class="order-payment-method">
                                         <div class="single-payment-method show">

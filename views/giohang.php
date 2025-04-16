@@ -36,6 +36,20 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        a,
+        a:hover {
+            text-decoration: none;
+        }
+
+        .product-item:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+    </style>
 </head>
 
 <body>
@@ -81,7 +95,6 @@
                                                 Chọn tất cả</th>
                                             <th>Ảnh sản phẩm</th>
                                             <th>Tên sản phẩm</th>
-                                            <th>Size</th>
                                             <th>Giá</th>
                                             <th>Số lượng</th>
                                             <th>Thành tiền</th>
@@ -106,26 +119,13 @@
                                                     src="<?= $item['img_sp'] ?>"
                                                     alt="Ảnh sản phẩm"></td>
                                             <td>
-                                                <p style="font-size: 1.1vw;">
+                                                <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $item['sp_id'] ?>">
                                                     <?= $item['ten_sp'] ?>
-                                                </p>
+                                                </a>
                                             </td>
-                                            <td><?= $item['size_value'] ?>
-                                            </td>
-                                            <td>
-                                                <p style="font-size: 1.3vw; font-weight:700;color:red">
-                                                    <?= number_format($item['km_sp']) ?>₫
-                                                </p>
-                                                <p style="font-size: 1.1vw; text-decoration:line-through;color:gray">
-                                                    <?= number_format($item['gia_sp']) ?>₫
-                                                </p>
-                                            </td>
-                                            <td><?= $item['so_luong'] ?>
-                                            </td>
-                                            <td class="thanh-tien"
-                                                style="font-size: 1.1vw; font-weight:400;color:green">
-                                                <?= number_format($thanhTien) ?>₫
-                                            </td>
+                                            <td><?= number_format($item['gia_sp']) ?>₫</td>
+                                            <td><?= $item['so_luong'] ?></td>
+                                            <td><?= number_format($thanhTien) ?>₫</td>
                                             <td>
                                                 <a href="<?= BASE_URL . '?act=xoa-gio-hang&id='.$item['id'] ?>"
                                                     class="btn btn-danger">Xóa</a>
@@ -135,7 +135,7 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <td colspan="6" style="text-align:right; font-weight:bold;">Tổng tiền các
+                                            <td colspan="5" style="text-align:right; font-weight:bold;">Tổng tiền các
                                                 sản phẩm đã chọn:</td>
                                             <td style="font-size: 1.1vw; font-weight:700;color:green"
                                                 id="tongTienDaChon">0₫</td>

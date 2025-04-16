@@ -11,17 +11,14 @@ class CartController
         $this->cartModel = new CartModel();
         $this->category = new Category();
         $this->taikhoan = new taikhoan();
-
     }
 
     public function addToCart()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $spbt_id = (int)$_POST['spbt_id'];
-            $size_id = (int)$_POST['size_id'];
+            $sp_id = (int)$_POST['sp_id'];
             $so_luong = (int)$_POST['so_luong'];
-            // var_dump($spbt_id);
-            // die;
+
             $listtaikhoan = $this->taikhoan->getAlltaikhoan();
             if (!$_SESSION['taikhoan']) {
                 $_SESSION['error'] = "Đăng nhập để thêm sản phẩm vào giỏ";
@@ -36,13 +33,12 @@ class CartController
                 }
             }
 
-            // var_dump($spbt_id.'-'. $size_id .'-'. $so_luong.'-'.$tk_id);die;
-            $checkAddCart = $this->cartModel->addToCart($tk_id, $spbt_id, $size_id, $so_luong);
+            $checkAddCart = $this->cartModel->addToCart($tk_id, $sp_id, $so_luong);
             if ($checkAddCart) {
                 header('Location: ' . BASE_URL . '?act=gio-hang');
                 exit;
             } else {
-                header('Location: ' . BASE_URL . '?act=chi-tiet-san-pham&id='.$spbt_id.'&size_id='.$size_id);
+                header('Location: ' . BASE_URL . '?act=chi-tiet-san-pham&id='.$sp_id);
                 exit;
             }
         }
@@ -70,15 +66,12 @@ class CartController
         }
 
         $cartItems = $this->cartModel->getCartItems($tk_id);
-        // var_dump($cartItems);
-        // die;
         require_once './views/giohang.php';
     }
 
     public function deleteCart()
     {
         $id = $_GET['id'];
-        // var_dump($id);die;
         $cart = $this->cartModel->getCartById($id);
         if ($cart) {
             $this->cartModel->deleteCart($id);
@@ -88,5 +81,4 @@ class CartController
             header('location: '.BASE_URL.'?act=gio-hang');
         }
     }
-
 }

@@ -8,74 +8,79 @@ class AdminEvaluation
     {
         $this->conn = connectDB();
     }
-    public function getAllEvaluations($spbt_id = null)
+
+    public function getAllEvaluations($sp_id = null)
     {
         try {
-            // Câu lệnh SQL sử dụng JOIN để lấy dữ liệu từ các bảng liên quan
-            $sql = 'SELECT 
-                        danh_gia.dg_id,
-                        danh_gia.noi_dung,
-                        danh_gia.so_sao,
-                        danh_gia.an_hien,
-                        danh_gia.ngay_tao,
-                        san_pham.ten_sp,
-                        tb_size.size_value,
-                        taikhoan.ho_ten
-                    FROM 
-                        danh_gia
-                    JOIN  sp_bien_the  ON   danh_gia.spbt_id = sp_bien_the.spbt_id
-                    JOIN  taikhoan  ON   danh_gia.tk_id = taikhoan.tk_id
-                    JOIN san_pham ON san_pham.sp_id = sp_bien_the.sp_id
-                    JOIN tb_size ON tb_size.size_id = sp_bien_the.size_id ';
-            
+            $sql = 'SELECT danh_gia.*, san_pham.ten_sp, taikhoan.ho_ten
+                    FROM danh_gia
+                    INNER JOIN san_pham ON danh_gia.sp_id = san_pham.sp_id
+                    INNER JOIN taikhoan ON danh_gia.tk_id = taikhoan.tk_id
+                    ORDER BY danh_gia.ngay_tao DESC';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về mảng kết hợp
+            return $stmt->fetchAll();
         } catch (Exception $e) {
-            echo 'Lỗi getAllReviews(): ' . $e->getMessage();
+            echo 'Lỗi getAllEvaluations() '.$e->getMessage();
         }
     }
-    
 
-    public function deleteEvaluation($dg_id)
+    public function getEvaluationById($dg_id)
     {
         try {
-            $sql = "DELETE FROM danh_gia WHERE dg_id=:dg_id";
+            $sql = 'SELECT danh_gia.*, san_pham.ten_sp, taikhoan.ho_ten
+                    FROM danh_gia
+                    INNER JOIN san_pham ON danh_gia.sp_id = san_pham.sp_id
+                    INNER JOIN taikhoan ON danh_gia.tk_id = taikhoan.tk_id
+                    WHERE danh_gia.dg_id = :dg_id';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
                 ':dg_id' => $dg_id
             ]);
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            echo 'Lỗi getEvaluationById() '.$e->getMessage();
+        }
+    }
 
+    public function deleteEvaluation($dg_id)
+    {
+        try {
+            $sql = "DELETE FROM danh_gia WHERE dg_id = :dg_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':dg_id' => $dg_id
+            ]);
             return true;
         } catch (Exception $e) {
-            echo 'Lỗi deleteDanhGia() '.$e->getMessage();
+            echo 'Lỗi deleteEvaluation() '.$e->getMessage();
         }
     }
 
     // Phương thức ẩn đánh giá
-public function hideEvaluation($dg_id)
-{
-    try {
-        $sql = 'UPDATE danh_gia SET an_hien = 0 WHERE dg_id = :dg_id';
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':dg_id', $dg_id, PDO::PARAM_INT);
-        $stmt->execute();
-    } catch (Exception $e) {
-        echo 'Lỗi: ' . $e->getMessage();
+    public function hideEvaluation($dg_id)
+    {
+        try {
+            $sql = 'UPDATE danh_gia SET an_hien = 0 WHERE dg_id = :dg_id';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':dg_id', $dg_id, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (Exception $e) {
+            echo 'Lỗi: ' . $e->getMessage();
+        }
     }
-}
 
-// Phương thức hiện đánh giá
-public function showEvaluation($dg_id)
-{
-    try {
-        $sql = 'UPDATE danh_gia SET an_hien = 1 WHERE dg_id = :dg_id';
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':dg_id', $dg_id, PDO::PARAM_INT);
-        $stmt->execute();
-    } catch (Exception $e) {
-        echo 'Lỗi: ' . $e->getMessage();
+    // Phương thức hiện đánh giá
+    public function showEvaluation($dg_id)
+    {
+        try {
+            $sql = 'UPDATE danh_gia SET an_hien = 1 WHERE dg_id = :dg_id';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':dg_id', $dg_id, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (Exception $e) {
+            echo 'Lỗi: ' . $e->getMessage();
+        }
     }
-}
 
 }

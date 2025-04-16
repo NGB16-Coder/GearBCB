@@ -1,10 +1,20 @@
 <?php
 
+require_once "models/Product.php";
+require_once "models/Category.php";
+require_once "models/Cart.php";
+require_once "models/Order.php";
+// require_once "models/Account.php";
+require_once "models/taikhoan.php";
+// require_once "models/CartModel.php";
 
 class HomeController
 {
-    public $product;
-    public $category;
+    private $product;
+    private $category;
+    private $cart;
+    private $order;
+    private $account;
     public $taikhoan;
     private $cartModel;
 
@@ -12,7 +22,10 @@ class HomeController
     {
         $this->product = new Product();
         $this->category = new Category();
-        $this->taikhoan = new taikhoan();
+        $this->cart = new CartModel();
+        $this->order = new OrderModel();
+        // $this->account = new Account();
+        $this->taikhoan = new Taikhoan();
         $this->cartModel = new CartModel();
 
     }
@@ -274,35 +287,19 @@ class HomeController
 
     public function addEvaluation()
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $orderDetails = $_POST['orderDetails'];
-            $order_id = $_POST['order_id'];
+        if (isset($_POST['orderDetails']) && isset($_POST['tk_id']) && isset($_POST['order_id'])) {
             $tk_id = $_POST['tk_id'];
+            $order_id = $_POST['order_id'];
 
-            if (is_array($orderDetails)) {
-                foreach ($orderDetails as $product) {
-                    // Lấy dữ liệu từng sản phẩm
-                    $spbt_id = $product['spbt_id'];
-                    $sp_id = $product['sp_id'];
-                    $so_sao = $product['so_sao'];
-                    $noi_dung = $product['noi_dung'];
-                    // var_dump($spbt_id, $sp_id, $so_sao, $noi_dung, $tk_id, $order_id);
-                    // die();
-                    $this->product->addEvaluation($tk_id, $spbt_id, $sp_id, $order_id, $noi_dung, $so_sao);
-                }
-                echo "<script>
-                alert('Đánh giá của bạn đã được gửi thành công!');
-                window.location.href='" . BASE_URL . "?act=lich-su-don&id=" . $tk_id . "';
-                </script>";
-                exit;
-            } else {
-                echo "<script>
-                alert('Gửi không thành công!');
-                window.history.back();
-                </script>";
-                exit;
+            foreach ($_POST['orderDetails'] as $product) {
+                $sp_id = $product['sp_id'];
+                $so_sao = $product['so_sao'];
+                $noi_dung = $product['noi_dung'];
+
+                $this->product->addEvaluation($tk_id, $sp_id, $order_id, $noi_dung, $so_sao);
             }
 
+            header('location: ' . BASE_URL . '?act=lich-su-don-hang');
         }
     }
 
@@ -334,6 +331,18 @@ class HomeController
                 window.location.href='" . BASE_URL . "?act=info-Acc&id=" . $tk_id . "';
                 </script>";
             exit;
+        }
+    }
+
+    public function addToCart()
+    {
+        if (isset($_POST['sp_id']) && isset($_SESSION['user'])) {
+            $sp_id = $_POST['sp_id'];
+            $so_luong = $_POST['so_luong'];
+            $tk_id = $_SESSION['user']['tk_id'];
+
+            $this->cart->addToCart($sp_id, $tk_id, $so_luong);
+            header('location: '.BASE_URL . '?act=chi-tiet-san-pham&id=' . $sp_id);
         }
     }
 }

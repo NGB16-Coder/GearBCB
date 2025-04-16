@@ -46,14 +46,12 @@
                     <th>Giá</th>
                     <th>Giá KM</th>
                     <th>Số lượng</th>
-                    <th>Size</th>
                     <th>Trạng thái</th>
-                    <!--<th>Mô tả</th> -->
                     <th>Thao tác</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach($listProduct as $product): ?>
+                  <?php foreach ($listProduct as $product): ?>
                   <tr>
                     <td>
                       <?= $product["sp_id"] ?>
@@ -67,33 +65,22 @@
                       <img
                         src="<?= BASE_URL . $product["img_sp"] ?>"
                         width="100px" alt="Ảnh sản phẩm">
-
                     </td>
                     <td>
                       <?= number_format($product["gia_sp"]) ?>
                     </td>
                     <td>
-                      <?= number_format($product["km_sp"]) ?>
+                      <?= number_format($product["km_sp"]?: 0) ?>
                     </td>
                     <td>
                       <?= number_format($product["so_luong"]) ?>
                     </td>
                     <td>
-                      <?= $product["size_value"] ?>
-                    </td>
-                    <td>
                       <?= $product["so_luong"] > 0 ? "<p style='color:green;'>Còn hàng</p>" : "<p style='color:red; font-weight:700;'>Hết hàng</p>" ?>
                     </td>
-                    <!-- <td>
-                       //$product["mo_ta"] !== '' ? "Có mô tả, vào chi tiết để xem" : "Không có mô tả" ?>
-                    </td> -->
                     <td>
                       <a
-                        href="<?= BASE_URL_ADMIN.'?act=formAddSize&id='.$product['spbt_id']; ?>"><button
-                          class="btn btn-info">Thêm size</button></a>
-
-                      <a
-                        href="<?= BASE_URL_ADMIN.'?act=formEditProduct&id='.$product['spbt_id']; ?>"><button
+                        href="<?= BASE_URL_ADMIN.'?act=formEditProduct&id='.$product['sp_id']; ?>"><button
                           class="btn btn-warning">Sửa</button></a>
 
                       <a href="<?= BASE_URL_ADMIN.'?act=xoaProduct&id='.$product['sp_id']; ?>"
@@ -112,9 +99,7 @@
                     <th>Giá</th>
                     <th>Giá KM</th>
                     <th>Số lượng</th>
-                    <th>Size</th>
                     <th>Trạng thái</th>
-                    <!-- <th>Mô tả</th> -->
                     <th>Thao tác</th>
                   </tr>
                 </tfoot>

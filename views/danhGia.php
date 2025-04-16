@@ -36,7 +36,20 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
+        a,
+        a:hover {
+            text-decoration: none;
+        }
+
+        .product-item:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+
         .star-rating {
             display: flex;
             flex-direction: row-reverse;
@@ -98,7 +111,7 @@
                             <h3>Đánh Giá Sản Phẩm</h3>
                             <form method="post"
                                 action="<?= BASE_URL. '?act=addEvaluation'?>">
-                                <?php 
+                                <?php
                                 // var_dump($orderDetails);var_dump($tk_id);die;
                                 foreach ($orderDetails as $product): ?>
                                 <div class="row mt-4">
@@ -108,19 +121,21 @@
                                             alt="<?= $product['ten_sp'] ?>" />
                                     </div>
                                     <div class="col-9">
-                                    <h3><?= $product['ten_sp'] ?>
-                                        (Số lượng:
-                                        <?= $product['so_luong_mua'] ?>)
-                                        <input type="hidden" name="orderDetails[<?= $product['spbt_id'] ?>][spbt_id]" value="<?= $product['spbt_id'] ?>">
-                                        <input type="hidden" name="orderDetails[<?= $product['spbt_id'] ?>][sp_id]" value="<?= $product['sp_id'] ?>">
-                                        <input type="hidden" name="orderDetails[<?= $product['spbt_id'] ?>][size_id]" value="<?= $product['size_id'] ?>">
-                                    </h3>
+                                        <h3><?= $product['ten_sp'] ?>
+                                            (Số lượng:
+                                            <?= $product['so_luong_mua'] ?>)
+                                            <input type="hidden"
+                                                name="orderDetails[<?= $product['sp_id'] ?>][sp_id]"
+                                                value="<?= $product['sp_id'] ?>">
+                                        </h3>
                                         <div class="form-group row">
                                             <div class="col">
                                                 <label class="col-form-label">
                                                     <span class="text-danger">*</span> Nội dung đánh giá
                                                 </label>
-                                                <textarea name="orderDetails[<?= $product['spbt_id'] ?>][noi_dung]" class="form-control" rows="3"
+                                                <textarea
+                                                    name="orderDetails[<?= $product['sp_id'] ?>][noi_dung]"
+                                                    class="form-control" rows="3"
                                                     placeholder="Nhập đánh giá của bạn..."></textarea>
                                             </div>
                                         </div>
@@ -133,43 +148,43 @@
                                                 </label>
                                                 <div class="star-rating">
                                                     <input type="radio"
-                                                        id="star5-<?= $product['spbt_id'] ?>"
-                                                        name="orderDetails[<?= $product['spbt_id'] ?>][so_sao]"
+                                                        id="star5-<?= $product['sp_id'] ?>"
+                                                        name="orderDetails[<?= $product['sp_id'] ?>][so_sao]"
                                                         value="5" checked>
                                                     <label
-                                                        for="star5-<?= $product['spbt_id'] ?>"
+                                                        for="star5-<?= $product['sp_id'] ?>"
                                                         title="5 sao">&#9733;</label>
 
                                                     <input type="radio"
-                                                        id="star4-<?= $product['spbt_id'] ?>"
-                                                        name="orderDetails[<?= $product['spbt_id'] ?>][so_sao]"
+                                                        id="star4-<?= $product['sp_id'] ?>"
+                                                        name="orderDetails[<?= $product['sp_id'] ?>][so_sao]"
                                                         value="4">
                                                     <label
-                                                        for="star4-<?= $product['spbt_id'] ?>"
+                                                        for="star4-<?= $product['sp_id'] ?>"
                                                         title="4 sao">&#9733;</label>
 
                                                     <input type="radio"
-                                                        id="star3-<?= $product['spbt_id'] ?>"
-                                                        name="orderDetails[<?= $product['spbt_id'] ?>][so_sao]"
+                                                        id="star3-<?= $product['sp_id'] ?>"
+                                                        name="orderDetails[<?= $product['sp_id'] ?>][so_sao]"
                                                         value="3">
                                                     <label
-                                                        for="star3-<?= $product['spbt_id'] ?>"
+                                                        for="star3-<?= $product['sp_id'] ?>"
                                                         title="3 sao">&#9733;</label>
 
                                                     <input type="radio"
-                                                        id="star2-<?= $product['spbt_id'] ?>"
-                                                        name="orderDetails[<?= $product['spbt_id'] ?>][so_sao]"
+                                                        id="star2-<?= $product['sp_id'] ?>"
+                                                        name="orderDetails[<?= $product['sp_id'] ?>][so_sao]"
                                                         value="2">
                                                     <label
-                                                        for="star2-<?= $product['spbt_id'] ?>"
+                                                        for="star2-<?= $product['sp_id'] ?>"
                                                         title="2 sao">&#9733;</label>
 
                                                     <input type="radio"
-                                                        id="star1-<?= $product['spbt_id'] ?>"
-                                                        name="orderDetails[<?= $product['spbt_id'] ?>][so_sao]"
+                                                        id="star1-<?= $product['sp_id'] ?>"
+                                                        name="orderDetails[<?= $product['sp_id'] ?>][so_sao]"
                                                         value="1">
                                                     <label
-                                                        for="star1-<?= $product['spbt_id'] ?>"
+                                                        for="star1-<?= $product['sp_id'] ?>"
                                                         title="1 sao">&#9733;</label>
                                                 </div>
                                             </div>
@@ -178,10 +193,12 @@
                                 </div>
 
                                 <?php endforeach; ?>
-                                <input type="hidden" name="tk_id" value="<?= $tk_id ?>">  
-                                <input type="hidden" name="order_id" value="<?= $order_id ?>">  
+                                <input type="hidden" name="tk_id"
+                                    value="<?= $tk_id ?>">
+                                <input type="hidden" name="order_id"
+                                    value="<?= $order_id ?>">
                                 <p class="d-flex justify-content-end">
-                                <button type="submit" class="btn btn-success mt-3">Gửi Đánh Giá</button>
+                                    <button type="submit" class="btn btn-success mt-3">Gửi Đánh Giá</button>
                                 </p>
                             </form>
 

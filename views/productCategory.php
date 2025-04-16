@@ -34,7 +34,20 @@
     <link rel="stylesheet" href="assets/css/plugins/jqueryui.min.css">
     <!-- main style css -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        a,
+        a:hover {
+            text-decoration: none;
+        }
 
+        .product-item:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+    </style>
 </head>
 
 <body>
@@ -143,37 +156,52 @@
                     <div class="col-lg-9 order-1">
                         <div class="shop-product-wrapper">
                             <!-- product item list wrapper start -->
-                            <div class="row justify-content-left">
+                            <div class="row justify-content-start">
                                 <?php
-                                $tempProducts = []; // Mảng để lưu trữ các ID đã hiển thị
-    foreach ($productCategory as $product) {
-        // Kiểm tra nếu sản phẩm đã được hiển thị
-        if (in_array($product['sp_id'], $tempProducts)) {
-            continue; // Bỏ qua nếu sản phẩm đã hiển thị
-        }
-        $tempProducts[] = $product['sp_id'];?>
-
-                                <div class="col-3 mb-4">
-                                    <div class="product-item text-center">
-                                        <a
-                                            href="<?php echo BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['spbt_id'].'&size_id='.$product['size_id'].'&sp_id='.$product['sp_id']; ?>">
-                                            <div class="product-thumb">
+    $tempProducts = []; // Mảng lưu trữ các ID đã hiển thị
+    if (empty($productCategory)) { ?>
+                                <div class="col-12 text-center py-5">
+                                    <p class="text-muted fs-4">Không có sản phẩm nào trong danh mục này.</p>
+                                </div>
+                                <?php } else {
+                                    foreach ($productCategory as $product) {
+                                        // Kiểm tra nếu sản phẩm đã được hiển thị
+                                        if (in_array($product['sp_id'], $tempProducts)) {
+                                            continue; // Bỏ qua nếu sản phẩm đã hiển thị
+                                        }
+                                        $tempProducts[] = $product['sp_id'];
+                                        ?>
+                                <div class="col-6 col-md-4 col-lg-3 mb-4">
+                                    <div class="product-item text-center border rounded p-3 h-100">
+                                        <a href="<?php echo BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['sp_id']; ?>"
+                                            class="text-decoration-none">
+                                            <div class="product-thumb mb-3">
                                                 <img src="<?php echo $product['img_sp']; ?>"
-                                                    alt="Ảnh sản phẩm" class="img-fluid">
-                                                <!-- Thêm lớp img-fluid để hình ảnh co giãn -->
+                                                    alt="Ảnh sản phẩm" class="img-fluid rounded">
                                             </div>
-                                            <p style="font-size: 1.3vw; font-weight:700;color:red">
-                                                <?php echo number_format($product['km_sp']); ?>₫
-                                                <span style="font-size: 1.1vw; text-decoration:line-through;color:gray">
+                                            <div class="product-price mb-2">
+                                                <?php if (!empty($product['km_sp']) && $product['km_sp'] < $product['gia_sp']) { ?>
+                                                <span class="fw-bold text-danger" style="font-size: 1.3rem;">
+                                                    <?php echo number_format($product['km_sp']); ?>₫
+                                                </span>
+                                                <span class="text-muted text-decoration-line-through"
+                                                    style="font-size: 1.1rem;">
                                                     <?php echo number_format($product['gia_sp']); ?>₫
                                                 </span>
-                                            </p>
-                                            <p style="color:burlywood; font-size:1.2vw">
-                                                <?php echo $product['ten_sp']; ?>
+                                                <?php } else { ?>
+                                                <span class="fw-bold text-dark" style="font-size: 1.3rem;">
+                                                    <?php echo number_format($product['gia_sp']); ?>₫
+                                                </span>
+                                                <?php } ?>
+                                            </div>
+                                            <p class="text-truncate text-warning-emphasis fw-medium"
+                                                style="font-size: 1.2rem;">
+                                                <?php echo htmlspecialchars($product['ten_sp']); ?>
                                             </p>
                                         </a>
                                     </div>
                                 </div>
+                                <?php } ?>
                                 <?php } ?>
                             </div>
                             <!-- product item list wrapper end -->

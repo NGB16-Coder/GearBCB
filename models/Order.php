@@ -9,7 +9,7 @@ class OrderModel
         $this->conn = connectDB();
     }
 
-    public function createOrder($tk_id,$ten_nhan,$sdt_nhan,$dia_chi_nhan, $items)
+    public function createOrder($tk_id, $ten_nhan, $sdt_nhan, $dia_chi_nhan, $items)
     {
         try {
             $totalQuantity = 0;
@@ -32,27 +32,25 @@ class OrderModel
             $order_id = $this->conn->lastInsertId();
             //chi tiết đơn hàng
             foreach ($items as $item) {
-                $sqlDetail = "INSERT INTO chi_tiet_don_hang ( order_id, spbt_id, so_luong_mua, gia_mua) VALUES (:order_id, :spbt_id, :so_luong_mua, :gia_mua)";
+                $sqlDetail = "INSERT INTO chi_tiet_don_hang (order_id, sp_id, so_luong_mua, gia_mua) VALUES (:order_id, :sp_id, :so_luong_mua, :gia_mua)";
                 $stmtDetail = $this->conn->prepare($sqlDetail);
                 $stmtDetail->execute([
                     ':order_id' => $order_id,
-                    ':spbt_id' => $item['spbt_id'],
+                    ':sp_id' => $item['sp_id'],
                     ':so_luong_mua' => $item['so_luong'],
                     ':gia_mua' => $item['km_sp']
                 ]);
             }
             // Giảm số lượng tồn kho
-            $sql = "UPDATE sp_bien_the SET so_luong = so_luong - :so_luong WHERE spbt_id = :spbt_id";
+            $sql = "UPDATE san_pham SET so_luong = so_luong - :so_luong WHERE sp_id = :sp_id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
                 ':so_luong' => $item['so_luong'],
-                ':spbt_id' => $item['spbt_id'],
+                ':sp_id' => $item['sp_id']
             ]);
-            // var_dump($order_id);
-            return $order_id;
+            return true;
         } catch (Exception $e) {
-            echo 'Lỗi createOrder(): ' . $e->getMessage();
-            return false;
+            echo 'Lỗi createOrder() '.$e->getMessage();
         }
     }
 
@@ -113,13 +111,13 @@ class OrderModel
     {
         try {
             $sql = "
-            SELECT chi_tiet_don_hang.spbt_id
+            SELECT chi_tiet_don_hang.sp_id
             FROM chi_tiet_don_hang
             LEFT JOIN danh_gia ON chi_tiet_don_hang.order_id = danh_gia.order_id 
-                AND chi_tiet_don_hang.spbt_id = danh_gia.spbt_id
+                AND chi_tiet_don_hang.sp_id = danh_gia.sp_id
             WHERE chi_tiet_don_hang.order_id = :order_id
-            GROUP BY chi_tiet_don_hang.spbt_id
-            HAVING COUNT(danh_gia.dg_id) = COUNT(chi_tiet_don_hang.spbt_id)"; // Kiểm tra tất cả sản phẩm có đánh giá hay không
+            GROUP BY chi_tiet_don_hang.sp_id
+            HAVING COUNT(danh_gia.dg_id) = COUNT(chi_tiet_don_hang.sp_id)"; // Kiểm tra tất cả sản phẩm có đánh giá hay không
 
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':order_id', $order_id);
@@ -150,11 +148,9 @@ class OrderModel
     public function getOrderDetails($order_id)
     {
         try {
-            $sql = "SELECT chi_tiet_don_hang.*, san_pham.ten_sp, san_pham.img_sp, tb_size.size_value, san_pham.sp_id, sp_bien_the.spbt_id, sp_bien_the.size_id
+            $sql = "SELECT chi_tiet_don_hang.*, san_pham.ten_sp, san_pham.img_sp, san_pham.sp_id
             FROM chi_tiet_don_hang
-            INNER JOIN sp_bien_the ON chi_tiet_don_hang.spbt_id = sp_bien_the.spbt_id
-            INNER join san_pham ON san_pham.sp_id = sp_bien_the.sp_id
-            INNER JOIN tb_size ON tb_size.size_id = sp_bien_the.size_id
+            INNER JOIN san_pham ON san_pham.sp_id = chi_tiet_don_hang.sp_id
             WHERE chi_tiet_don_hang.order_id = :order_id";
 
             $stmt = $this->conn->prepare($sql);
@@ -169,7 +165,7 @@ class OrderModel
     public function getProductRatings($tk_id, $order_id)
     {
         try {
-            $sql = "SELECT spbt_id, dg_id
+            $sql = "SELECT sp_id, dg_id
             FROM danh_gia
             WHERE tk_id = :tk_id AND order_id = :order_id";
 

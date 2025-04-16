@@ -45,11 +45,9 @@ class AdminOrder
     public function getProductOrder($order_id)
     {
         try {
-            $sql = "SELECT chi_tiet_don_hang.ctdh_id,chi_tiet_don_hang.order_id,chi_tiet_don_hang.spbt_id,chi_tiet_don_hang.gia_mua,chi_tiet_don_hang.so_luong_mua, tb_size.size_value, san_pham.ten_sp
+            $sql = "SELECT chi_tiet_don_hang.ctdh_id, chi_tiet_don_hang.order_id, chi_tiet_don_hang.sp_id, chi_tiet_don_hang.gia_mua, chi_tiet_don_hang.so_luong_mua, san_pham.ten_sp
                     FROM chi_tiet_don_hang
-                    INNER JOIN sp_bien_the ON chi_tiet_don_hang.spbt_id = sp_bien_the.spbt_id
-                    INNER JOIN tb_size ON tb_size.size_id = sp_bien_the.size_id
-                    INNER JOIN san_pham ON sp_bien_the.sp_id = san_pham.sp_id
+                    INNER JOIN san_pham ON chi_tiet_don_hang.sp_id = san_pham.sp_id
                     WHERE chi_tiet_don_hang.order_id = :order_id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([

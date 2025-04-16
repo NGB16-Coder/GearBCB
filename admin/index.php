@@ -22,7 +22,7 @@ require_once './models/AdminProduct.php';
 require_once './models/AdminUser.php';
 require_once './models/AdminEvaluation.php';
 require_once './models/AdminComment.php';
-require_once './models/AdminSize.php';
+// require_once './models/AdminSize.php';
 require_once './models/AdminOrder.php';
 
 
@@ -53,8 +53,8 @@ match ($act) {
     'formEditProduct' => (new AdminProductController())->formEditProduct(),
     'editProduct' => (new AdminProductController())->editProduct(),
     'xoaProduct' => (new AdminProductController())->xoaProduct(),
-    'formAddSize' => (new AdminProductController())->formAddSize(),
-    'addSize' => (new AdminProductController())->addSize(),
+    // 'formAddSize' => (new AdminProductController())->formAddSize(),
+    // 'addSize' => (new AdminProductController())->addSize(),
 
     // router user
     'listUser' => (new AdminUserController())->listUser(),

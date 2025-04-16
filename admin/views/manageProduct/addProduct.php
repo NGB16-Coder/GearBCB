@@ -108,27 +108,6 @@
                                     <?php } ?>
                                 </div>
 
-                                <!-- Size -->
-                                <div class="form-group col-6">
-                                    <label for="size_id">Size</label>
-                                    <select class="form-control" name="size_id" id="size_id">
-                                        <option selected disabled>Chọn size sản phẩm</option>
-
-                                        <?php foreach ($listSize as $size): ?>
-                                        <option
-                                            value="<?= $size['size_id'] ?>">
-                                            <?= $size['size_value'] ?>
-                                        </option>
-                                        <?php endforeach; ?>
-
-                                    </select>
-                                    <?php if (isset($_SESSION['error']['size_id'])) { ?>
-                                    <p class="text-danger">
-                                        <?= $_SESSION['error']['size_id'] ?>
-                                    </p>
-                                    <?php } ?>
-                                </div>
-
                                 <!-- Số lượng -->
                                 <div class="form-group col-6">
                                     <label for="so_luong">Số lượng</label>
