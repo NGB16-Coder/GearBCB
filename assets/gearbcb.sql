@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost:3306
--- Thời gian đã tạo: Th4 17, 2025 lúc 10:40 AM
+-- Thời gian đã tạo: Th4 17, 2025 lúc 11:00 AM
 -- Phiên bản máy phục vụ: 8.0.30
 -- Phiên bản PHP: 8.2.20
 
@@ -33,7 +33,6 @@ CREATE TABLE `binh_luan` (
   `sp_id` int NOT NULL,
   `noi_dung` varchar(255) NOT NULL,
   `an_hien` bit(1) DEFAULT b'1',
-  `spbt_id` int NOT NULL,
   `ngay_tao` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ngay_update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
