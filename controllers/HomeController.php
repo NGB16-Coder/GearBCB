@@ -255,12 +255,11 @@ class HomeController
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $spbt_id = $_POST['spbt_id'];
-            $size_id = $_POST['size_id'];
+           
             $noi_dung = $_POST['noi_dung'];
             $sp_id = $_POST['sp_id'];
             $this->product->addBinhLuan($tk_id, $sp_id, $noi_dung);
-            header('location: '.BASE_URL . '?act=chi-tiet-san-pham&id=' . $spbt_id . '&size_id='.$size_id.'&sp_id='.$sp_id);
+            header('location: '.BASE_URL . '?act=chi-tiet-san-pham&id=' .$sp_id);
             exit;
         } else {
             echo "<script>
