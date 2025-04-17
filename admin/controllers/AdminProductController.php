@@ -57,7 +57,7 @@ class AdminProductController
                 $errors['mo_ta'] = 'Mô tả sản phẩm không được để trống!';
             }
             $img_sp = $_FILES['img_sp'];
-            
+
             if ($img_sp['error'] == 0) {
                 $extension = pathinfo($img_sp['name'], PATHINFO_EXTENSION);
                 if (!in_array($extension, ['jpg', 'png', 'jpeg', 'gif'])) {
@@ -105,7 +105,7 @@ class AdminProductController
             $so_luong = $_POST['so_luong'] ?? '';
             $dm_id = $_POST['dm_id'] ?? '';
             $mo_ta = $_POST['mo_ta'] ?? '';
-    
+
             $errors = [];
             if (empty($ten_sp)) {
                 $errors['ten_sp'] = 'Tên sản phẩm không được để trống!';
@@ -125,10 +125,10 @@ class AdminProductController
             if (empty($mo_ta)) {
                 $errors['mo_ta'] = 'Mô tả sản phẩm không được để trống!';
             }
-    
+
             $product = $this->modelProduct->getSanPham($sp_id);
             $img_sp = $_FILES['img_sp'];
-    
+
             // Kiểm tra ảnh nếu người dùng chọn ảnh mới
             if ($img_sp['error'] == 0) {
                 $extension = pathinfo($img_sp['name'], PATHINFO_EXTENSION);
@@ -136,7 +136,7 @@ class AdminProductController
                     $errors['img_sp'] = 'Ảnh không đúng định dạng!';
                 }
             }
-    
+
             $_SESSION['error'] = $errors;
             if (empty($errors)) {
                 // Nếu người dùng có chọn ảnh mới thì upload, ngược lại dùng ảnh cũ
@@ -146,7 +146,7 @@ class AdminProductController
                 } else {
                     $file_thumb = $product['img_sp'];
                 }
-    
+
                 $this->modelProduct->updateProduct($ten_sp, $mo_ta, $file_thumb, $dm_id, $gia_sp, $km_sp, $so_luong, $sp_id);
                 header('location:' . BASE_URL_ADMIN . '?act=listProduct');
                 exit();
@@ -157,7 +157,7 @@ class AdminProductController
             }
         }
     }
-    
+
 
     public function xoaProduct()
     {

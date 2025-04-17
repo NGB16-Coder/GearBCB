@@ -16,7 +16,7 @@
             <div class="row mb-2">
                 <div class="col-sm-12">
                     <h1><a href="<?= BASE_URL_ADMIN ?>">Trang ADMIN
-                            BAĐ</a></h1>
+                            BCB</a></h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->

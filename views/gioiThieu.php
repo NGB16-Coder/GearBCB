@@ -83,14 +83,14 @@
                 <div class="row align-items-top">
                     <div class="col-lg-5">
                         <div class="about-thumb">
-                            <img src="assets/img/about/about.jpg" alt="about thumb">
+                            <img src="assets/img/banner/banner1.jpg" alt="about thumb">
                         </div>
                     </div>
                     <div class="col-lg-7">
                         <div class="about-content">
                             <h2 class="about-title">Về chúng tôi</h2>
                             <h5 class="about-sub-title">
-                                Chào mừng bạn đến với BAĐ, nơi cung cấp các sản phẩm giữ nhiệt
+                                Chào mừng bạn đến với BCB, nơi cung cấp các sản phẩm giữ nhiệt
                                 chất lượng cao như cốc giữ nhiệt, ấm giữ nhiệt và bình giữ nhiệt.
                                 Chúng tôi hiểu rằng việc giữ nhiệt cho đồ uống là rất quan trọng,
                                 đặc biệt trong những ngày lạnh giá hay khi bạn cần thưởng thức đồ
@@ -124,7 +124,7 @@
                                 và các sản phẩm mới nhất. Chúng tôi thường xuyên cập nhật các ưu đãi đặc biệt dành cho
                                 khách hàng thân thiết.</p>
                             <h3>Kết Luận </h3>
-                            <p>Hãy đến với <b>BAĐ</b> để trải nghiệm những sản phẩm giữ nhiệt tốt nhất trên thị trường.
+                            <p>Hãy đến với <b>BCB</b> để trải nghiệm những sản phẩm giữ nhiệt tốt nhất trên thị trường.
                                 Chúng tôi tin rằng bạn sẽ hài lòng với sự lựa chọn của mình và tìm thấy những sản phẩm
                                 phù hợp nhất cho nhu cầu của bạn.</p>
                         </div>

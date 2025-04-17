@@ -10,8 +10,7 @@
     <!-- Sidebar user (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image" style="width:4.1rem">
-        <img style="width:3.1rem" src="./assets/dist/img/logo.jpg" class="img-circle elevation-2" alt="User Image">
-        <span style="font-size: 26px; color:white; margin:20px">BAĐ SHOP</span>
+      <img src="./assets/dist/img/logo.png" alt="User" style="width:200px">
       </div>
     </div>
 
