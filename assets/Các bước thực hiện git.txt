@@ -1,0 +1,44 @@
+Các bước git dự án:
+
+Bước 1: Clone hoặc Pull về dự án từ GitHub
+Nếu chưa clone về máy:
+git clone https://github.com/username/repository.git
+
+Nếu đã clone rồi, thì pull về mới nhất từ develop (đảm bảo đồng bộ với code của nhóm):
+git checkout develop         # Chuyển sang nhánh develop
+git pull origin develop      # Lấy code mới nhất từ develop về máy
+
+Bước 2: vào nhánh chức năng cần làm
+git branch -a
+git checkout nhánh cần làm
+
+Bước 3: Phát triển tính năng hoặc sửa lỗi (sau khi đã code xong hoặc sửa lỗi xong)
+git add .
+git commit -m "Mô tả"
+
+Bước 4: Push code lên
+git push origin feature/ten-tinh-nang
+
+
+Bước của bạn:
+Bước 1: Kiểm tra mã nguồn từ develop
+git checkout develop         # Chuyển sang nhánh develop
+git pull origin develop      # Lấy code mới nhất từ GitHub
+
+Bước 2: Kiểm tra code trên máy của bạn
+Kiểm tra và chạy ứng dụng, nếu có lỗi hoặc không đúng yêu cầu, bạn có thể yêu cầu thành viên sửa lại
+- git add .
+- git commit -m ""
+Bước 3: Merge code từ develop vào main
+Chuyển sang nhánh main:
+- git checkout main
+Lấy mã nguồn mới nhất từ main (để tránh xung đột):
+- git pull origin main
+Gộp nhánh develop vào main:
+- git merge develop
+Nếu không có xung đột, push code lên main:
+- git push origin main
+
+
+
+

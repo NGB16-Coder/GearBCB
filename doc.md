@@ -10,7 +10,6 @@
 
 - Cấu hình DB trong file commons/env.php
 
-
 TEST 1
 
 $abc
