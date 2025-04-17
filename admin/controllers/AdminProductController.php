@@ -56,8 +56,8 @@ class AdminProductController
             if (empty($mo_ta)) {
                 $errors['mo_ta'] = 'Mô tả sản phẩm không được để trống!';
             }
-
             $img_sp = $_FILES['img_sp'];
+            
             if ($img_sp['error'] == 0) {
                 $extension = pathinfo($img_sp['name'], PATHINFO_EXTENSION);
                 if (!in_array($extension, ['jpg', 'png', 'jpeg', 'gif'])) {
@@ -69,10 +69,8 @@ class AdminProductController
 
             $_SESSION['error'] = $errors;
             if (empty($errors)) {
-                $file = $img_sp['tmp_name'];
-                $new_file = './public/upload/' . $img_sp['name'];
-                move_uploaded_file($file, $new_file);
-                $this->modelProduct->insertProduct($ten_sp, $gia_sp, $km_sp, $so_luong, $dm_id, $new_file, $mo_ta);
+                $file_thumb = uploadFile($img_sp, 'assets/img/product/');
+                $this->modelProduct->insertProduct($ten_sp, $gia_sp, $km_sp, $so_luong, $dm_id, $file_thumb, $mo_ta);
                 header('location:' . BASE_URL_ADMIN . '?act=listProduct');
                 exit();
             } else {
