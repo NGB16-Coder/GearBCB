@@ -41,7 +41,7 @@
                   <tr>
                     <th>ID</th>
                     <th>Tên Sản Phẩm</th>
-                    <th>Size</th>
+                    <!-- <th>Size</th> -->
                     <th>Người Đánh Giá</th>
                     <th>Nội Dung</th>
                     <th>Số Sao</th>
@@ -55,7 +55,6 @@
                     <tr>
                       <td><?= $Evaluation['dg_id'] ?></td>
                       <td><?= $Evaluation['ten_sp'] ?></td>
-                      <td><?= $Evaluation['size_value'] ?></td>
                       <td><?= $Evaluation['ho_ten'] ?></td>
                       <td><?= $Evaluation['noi_dung'] ?></td>
                       <td><?= $Evaluation['so_sao'] ?></td>

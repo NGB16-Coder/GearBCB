@@ -122,7 +122,7 @@
                           <tr>
                             <th>Ảnh sản phẩm</th>
                             <th>Tên sản phẩm</th>
-                            <th>Size</th>
+                            <!-- <th>Size</th> -->
                             <th>Giá mua</th>
                             <th>Số lượng</th>
                           </tr>
@@ -138,9 +138,7 @@
                             <td>
                               <?= $sanpham['ten_sp'] ?>
                             </td>
-                            <td>
-                              <?= $sanpham['size_value'] ?>
-                            </td>
+                            
                             <td>
                               <?= number_format($sanpham['gia_mua']) ?>
                               VNĐ</td>

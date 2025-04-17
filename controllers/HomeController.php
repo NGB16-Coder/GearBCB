@@ -299,7 +299,7 @@ class HomeController
                 $this->product->addEvaluation($tk_id, $sp_id, $order_id, $noi_dung, $so_sao);
             }
 
-            header('location: ' . BASE_URL . '?act=lich-su-don-hang');
+            header('location: ' . BASE_URL . '?act=chi-tiet-san-pham&id=' . $product['sp_id']);
         }
     }
 
