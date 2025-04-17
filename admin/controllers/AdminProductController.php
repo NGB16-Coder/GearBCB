@@ -140,7 +140,7 @@ class AdminProductController
 
             $product = $this->modelProduct->getSanPham($sp_id);
             $img_sp = $_FILES['img_sp'];
-    
+
             // Kiểm tra ảnh nếu người dùng chọn ảnh mới
             if ($img_sp['error'] == 0) {
                 $extension = pathinfo($img_sp['name'], PATHINFO_EXTENSION);
@@ -150,7 +150,7 @@ class AdminProductController
             }
 
             $_SESSION['error'] = $errors;
-    
+
             if (empty($errors)) {
                 if ($img_sp['error'] == 0) {
                     deleteFile($product['img_sp']);
@@ -164,13 +164,13 @@ class AdminProductController
                 exit();
             } else {
                 $_SESSION['flash'] = true;
-                $_SESSION['old'] = $_POST; 
+                $_SESSION['old'] = $_POST;
                 header('location:' . BASE_URL_ADMIN . '?act=formEditProduct&id=' . $sp_id);
                 exit();
             }
         }
     }
-    
+
 
     public function xoaProduct()
     {
