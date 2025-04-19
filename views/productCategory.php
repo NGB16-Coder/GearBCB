@@ -109,45 +109,6 @@
                                 </div>
                             </div>
                             <!-- single sidebar end -->
-
-                            <!-- single sidebar start -->
-                            <div class="sidebar-single">
-                                <h5 class="sidebar-title">Giá</h5>
-                                <div class="sidebar-body">
-                                    <ul class="radio-container categories-list">
-                                        <li>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" class="custom-control-input" id="radio3"
-                                                    name="radio" checked>
-                                                <label class="custom-control-label" for="radio3"> Tất cả</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" class="custom-control-input" id="radio"
-                                                    name="radio">
-                                                <label class="custom-control-label" for="radio"> &lt; 200 VND</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" class="custom-control-input" id="radio1"
-                                                    name="radio">
-                                                <label class="custom-control-label" for="radio1">200 VND -500
-                                                    VND</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" class="custom-control-input" id="radio2"
-                                                    name="radio">
-                                                <label class="custom-control-label" for="radio2"> &gt; 500 VND </label>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- single sidebar end -->
                         </aside>
                     </div>
                     <!-- sidebar area end -->

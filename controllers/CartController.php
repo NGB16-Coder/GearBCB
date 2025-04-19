@@ -49,6 +49,7 @@ class CartController
     {
         $listCategory = $this->category->getAllCategory();
         $listtaikhoan = $this->taikhoan->getAlltaikhoan();
+        // $product = $this->product->getProductById($sp_id);
         if (!$_SESSION['taikhoan']) {
             header('location: '.BASE_URL.'?act=dang-nhap');
             $_SESSION['error'] = "Đăng nhập để thêm sản phẩm vào giỏ";
@@ -59,11 +60,11 @@ class CartController
                 }
             }
         }
-        if (!$tk_id) {
-            $_SESSION['error'] = 'Vui lòng đăng nhập để xem giỏ hàng!';
-            header('Location: ' . BASE_URL . '?act=dang-nhap');
-            exit;
-        }
+        // if (!$tk_id) {
+        //     $_SESSION['error'] = 'Vui lòng đăng nhập để xem giỏ hàng!';
+        //     header('Location: ' . BASE_URL . '?act=dang-nhap');
+        //     exit;
+        // }
 
         $cartItems = $this->cartModel->getCartItems($tk_id);
         require_once './views/giohang.php';

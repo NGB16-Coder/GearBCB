@@ -118,13 +118,13 @@
                                         </div>
                                     </div>
                                     <div class="single-input-item">
-                                        <button type="submit" class="btn btn-sqr">Đăng nhập</button>
+                                        <button type="submit" class="btn btn-success">Đăng nhập</button>
                                     </div>
                                     <?php if (isset($_SESSION['error'])) { ?>
                                     <p style="font-size:1.2vw" class="text-danger">
                                         <?= $_SESSION['error']?>
                                     </p>
-                                    <?php }?>
+                                    <?php } $_SESSION['error'] = ""?>
                                 </form>
                             </div>
                         </div>

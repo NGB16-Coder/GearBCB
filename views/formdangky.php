@@ -166,7 +166,7 @@
                                         <div
                                             class="login-reg-form-meta d-flex align-items-center justify-content-between">
                                             <div class="remember-meta">
-                                                <button type="submit" class="btn btn-sqr">Đăng ký</button>
+                                                <button type="submit" class="btn btn-success">Đăng ký</button>
                                             </div>
                                             <span>Bạn đã có tài khoản? <br>Mời đến trang <a style="font-size: 16px;"
                                                     href="<?=BASE_URL.'?act=dang-nhap'?>"

@@ -169,7 +169,11 @@
         $tongTien += $thanhTien;
         ?>
                                                 <tr>
-                                                    <td><?= $item['ten_sp'] ?>
+                                                    <td
+                                                        style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                                        <?= $item['ten_sp'] ?>
+                                                    </td>
+
                                                     </td>
                                                     <td><?= $item['so_luong'] ?>
                                                     </td>
@@ -190,7 +194,7 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <td colspan="4" style="text-align:right; font-size: 1.2vw;"><b>Tổng
+                                                    <td colspan="3" style="text-align:right; font-size: 1.2vw;"><b>Tổng
                                                             tiền:</b>
                                                     </td>
                                                     <td><strong
@@ -215,7 +219,7 @@
                                             </div>
                                         </div>
                                         <div class="summary-footer-area">
-                                            <button type="submit" class="btn btn-sqr">Đặt hàng</button>
+                                            <button type="submit" class="btn btn-success">Đặt hàng</button>
                                         </div>
                                     </div>
                                 </div>

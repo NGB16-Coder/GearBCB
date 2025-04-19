@@ -34,7 +34,7 @@ class OrderController
                 }
             }
         }
-        $order_id = $this->orderModel->createOrder($tk_id,$ten_nhan,$sdt_nhan,$dia_chi_nhan, $selectedItems);
+        $order_id = $this->orderModel->createOrder($tk_id, $ten_nhan, $sdt_nhan, $dia_chi_nhan, $selectedItems);
 
 
         // Xóa sản phẩm đã đặt hàng khỏi giỏ
@@ -57,24 +57,24 @@ class OrderController
     }
 
     public function orderHistory()
-{
-    $tk_id = $_GET['id'];
-    $listCategory = $this->category->getAllCategory();
-    $orders = $this->orderModel->getOrdersByUser($tk_id);
-    
-    $allRatedStatus = [];
-    foreach ($orders as $order) {
-        if ($order['trang_thai'] == 3) {
-            // Kiểm tra xem tất cả các sản phẩm trong đơn hàng đã được đánh giá chưa
-            $allRatedStatus[$order['order_id']] = $this->orderModel->checkAllProductsRated($tk_id, $order['order_id']);
-        } else {
-            // Nếu đơn hàng chưa giao, không thể đánh giá
-            $allRatedStatus[$order['order_id']] = false;
+    {
+        $tk_id = $_GET['id'];
+        $listCategory = $this->category->getAllCategory();
+        $orders = $this->orderModel->getOrdersByUser($tk_id);
+
+        $allRatedStatus = [];
+        foreach ($orders as $order) {
+            if ($order['trang_thai'] == 3) {
+                // Kiểm tra xem tất cả các sản phẩm trong đơn hàng đã được đánh giá chưa
+                $allRatedStatus[$order['order_id']] = $this->orderModel->checkAllProductsRated($tk_id, $order['order_id']);
+            } else {
+                // Nếu đơn hàng chưa giao, không thể đánh giá
+                $allRatedStatus[$order['order_id']] = false;
+            }
         }
+
+        require_once './views/historyOrder.php';
     }
-    
-    require_once './views/historyOrder.php';
-}
 
 
     public function detailOrder()
@@ -92,19 +92,19 @@ class OrderController
         }
     }
 
-public function showReviewForm()
-{
-    $order_id = $_GET['order_id'];
-    $tk_id = $_GET['tk_id'];
-    $listCategory = $this->category->getAllCategory();
-    
-    // Lấy thông tin các sản phẩm trong đơn hàng
-    $orderDetails = $this->orderModel->getOrderDetails($order_id);
+    public function showReviewForm()
+    {
+        $order_id = $_GET['order_id'];
+        $tk_id = $_GET['tk_id'];
+        $listCategory = $this->category->getAllCategory();
 
-    // Lấy thông tin về trạng thái đánh giá của từng sản phẩm
-    $ratings = $this->orderModel->getProductRatings($tk_id, $order_id);
-    
-    require_once './views/danhGia.php';
-}
+        // Lấy thông tin các sản phẩm trong đơn hàng
+        $orderDetails = $this->orderModel->getOrderDetails($order_id);
+
+        // Lấy thông tin về trạng thái đánh giá của từng sản phẩm
+        $ratings = $this->orderModel->getProductRatings($tk_id, $order_id);
+
+        require_once './views/danhGia.php';
+    }
 
 }

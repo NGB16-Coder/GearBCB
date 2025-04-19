@@ -34,7 +34,8 @@
     <link rel="stylesheet" href="assets/css/plugins/jqueryui.min.css">
     <!-- main style css -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
@@ -59,7 +60,7 @@
 
 
     <main>
-    <div class="breadcrumb-area">
+        <div class="breadcrumb-area">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -83,63 +84,70 @@
                     <!-- Login Content Start -->
                     <div class="col-lg-12 ">
                         <div class="card-body">
-                        <?php if (!empty($orders)): ?>
-                                <table class="table table-bordered table-striped" style="text-align:center;">
-                                    <thead>
-                                        <tr>
-                                            <th>Mã Đơn Hàng</th>
-                                            <th>Tổng Số Lượng</th>
-                                            <th>Tổng Tiền</th>
-                                            <th>Ngày Đặt</th>
-                                            <th>Trạng thái</th>
-                                            <th>Chức năng</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-    <?php foreach ($orders as $order): ?>
-        <tr>
-            <td>#ĐH<?= $order['order_id'] ?></td>
-            <td><?= $order['tong_so_luong'] ?></td>
-            <td><?= number_format($order['tong_tien']) ?>₫</td>
-            <td><?= date('d/m/Y H:i', strtotime($order['ngay_dat'])) ?></td>
-            <td>
-                <?php if($order['trang_thai'] == 1){
-                    echo '<p class="alert alert-info">Chờ xác nhận</p>';
-                } elseif($order['trang_thai'] == 2) {
-                    echo '<p class="alert alert-warning">Đang giao hàng</p>';
-                } elseif($order['trang_thai'] == 3) {
-                    echo '<p class="alert alert-success">Đã giao hàng</p>';
-                } else {
-                    echo '<p class="alert alert-danger">Đã hủy</p>';
-                } ?>
-            </td>
-            <td>
-                <?php if ($order['trang_thai'] == 3) { ?>
-                    <?php if ($allRatedStatus[$order['order_id']]) { ?>
-                        <a href="<?= BASE_URL.'?act=chi-tiet-don-hang&id='.$order['order_id'] ?>" class="btn btn-primary">Xem Chi Tiết</a>
-                    <?php } else { ?>
-                        <a href="<?= BASE_URL.'?act=danh-gia&tk_id='.$tk_id.'&order_id='.$order['order_id'] ?>" class="btn btn-warning mt-1">Đánh Giá</a>
-                    <?php } ?>
-                <?php }else{ ?>
-                    <a href="<?= BASE_URL.'?act=chi-tiet-don-hang&id='.$order['order_id'] ?>" class="btn btn-primary">Xem Chi Tiết</a>
-                <?php } ?>
-            </td>
-        </tr>
-    <?php endforeach; ?>
-</tbody>
+                            <?php if (!empty($orders)): ?>
+                            <table class="table table-bordered table-striped" style="text-align:center;">
+                                <thead>
+                                    <tr>
+                                        <th>Mã Đơn Hàng</th>
+                                        <th>Tổng Số Lượng</th>
+                                        <th>Tổng Tiền</th>
+                                        <th>Ngày Đặt</th>
+                                        <th>Trạng thái</th>
+                                        <th>Chức năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($orders as $order): ?>
+                                    <tr>
+                                        <td>#ĐH<?= $order['order_id'] ?>
+                                        </td>
+                                        <td><?= $order['tong_so_luong'] ?>
+                                        </td>
+                                        <td><?= number_format($order['tong_tien']) ?>₫
+                                        </td>
+                                        <td><?= date('d/m/Y H:i', strtotime($order['ngay_dat'])) ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($order['trang_thai'] == 1) {
+                                                echo '<p class="alert alert-info">Chờ xác nhận</p>';
+                                            } elseif ($order['trang_thai'] == 2) {
+                                                echo '<p class="alert alert-warning">Đang giao hàng</p>';
+                                            } elseif ($order['trang_thai'] == 3) {
+                                                echo '<p class="alert alert-success">Đã giao hàng</p>';
+                                            } else {
+                                                echo '<p class="alert alert-danger">Đã hủy</p>';
+                                            } ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($order['trang_thai'] == 3) { ?>
+                                            <?php if ($allRatedStatus[$order['order_id']]) { ?>
+                                            <a href="<?= BASE_URL.'?act=chi-tiet-don-hang&id='.$order['order_id'] ?>"
+                                                class="btn btn-primary">Xem Chi Tiết</a>
+                                            <?php } else { ?>
+                                            <a href="<?= BASE_URL.'?act=danh-gia&tk_id='.$tk_id.'&order_id='.$order['order_id'] ?>"
+                                                class="btn btn-warning mt-1">Đánh Giá</a>
+                                            <?php } ?>
+                                            <?php } else { ?>
+                                            <a href="<?= BASE_URL.'?act=chi-tiet-don-hang&id='.$order['order_id'] ?>"
+                                                class="btn btn-primary">Xem Chi Tiết</a>
+                                            <?php } ?>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
 
-                                </table>
+                            </table>
                             <?php else: ?>
-                                <div style="text-align: center; margin: 20px; font-size: 1.5rem; font-weight: bold;">
-                                    Bạn chưa có đơn hàng nào.
-                                </div>
+                            <div style="text-align: center; margin: 20px; font-size: 1.5rem; font-weight: bold;">
+                                Bạn chưa có đơn hàng nào.
+                            </div>
                             <?php endif; ?>
                         </div>
 
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </main>
 

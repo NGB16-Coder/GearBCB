@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         a,
@@ -105,6 +105,7 @@
                                         <?php
                                         $tongTatCaTien = 0;
                                 foreach ($cartItems as $item):
+                                    $item['km_sp'] = $item['km_sp'] ?: $item['gia_sp'];
                                     $thanhTien = $item['km_sp'] * $item['so_luong'];
                                     $tongTatCaTien += $thanhTien;
                                     ?>
@@ -118,14 +119,20 @@
                                             <td><img style="max-width: 100px;"
                                                     src="<?= $item['img_sp'] ?>"
                                                     alt="Ảnh sản phẩm"></td>
-                                            <td>
-                                                <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $item['sp_id'] ?>">
+                                            <td
+                                                style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                                <a
+                                                    href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $item['sp_id'] ?>">
                                                     <?= $item['ten_sp'] ?>
                                                 </a>
                                             </td>
-                                            <td><?= number_format($item['gia_sp']) ?>₫</td>
-                                            <td><?= $item['so_luong'] ?></td>
-                                            <td><?= number_format($thanhTien) ?>₫</td>
+                                            <td><?= number_format($item['km_sp'] ?: $item['gia_sp']) ?>₫
+                                            </td>
+                                            <td style="max-width: 80px;">
+                                                <?= $item['so_luong'] ?>
+                                            </td>
+                                            <td><?= number_format($thanhTien) ?>₫
+                                            </td>
                                             <td>
                                                 <a href="<?= BASE_URL . '?act=xoa-gio-hang&id='.$item['id'] ?>"
                                                     class="btn btn-danger">Xóa</a>

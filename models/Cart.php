@@ -49,7 +49,7 @@ class CartModel
     public function getCartItems($tk_id)
     {
         try {
-            $sql = "SELECT gio_hang.*, san_pham.ten_sp, san_pham.img_sp, san_pham.gia_sp, san_pham.km_sp
+            $sql = "SELECT gio_hang.*, san_pham.ten_sp, san_pham.img_sp, san_pham.gia_sp, san_pham.km_sp, san_pham.so_luong AS sl_sp
                     FROM `gio_hang` 
                     INNER JOIN san_pham ON san_pham.sp_id = gio_hang.sp_id
                     WHERE tk_id = :tk_id

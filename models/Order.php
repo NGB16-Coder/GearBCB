@@ -40,14 +40,16 @@ class OrderModel
                     ':so_luong_mua' => $item['so_luong'],
                     ':gia_mua' => $item['km_sp']
                 ]);
+
+                // Giảm số lượng tồn kho
+                $sql = "UPDATE san_pham SET so_luong = so_luong - :so_luong WHERE sp_id = :sp_id";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->execute([
+                    ':so_luong' => $item['so_luong'],
+                    ':sp_id' => $item['sp_id']
+                ]);
             }
-            // Giảm số lượng tồn kho
-            $sql = "UPDATE san_pham SET so_luong = so_luong - :so_luong WHERE sp_id = :sp_id";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute([
-                ':so_luong' => $item['so_luong'],
-                ':sp_id' => $item['sp_id']
-            ]);
+
             return true;
         } catch (Exception $e) {
             echo 'Lỗi createOrder() '.$e->getMessage();
