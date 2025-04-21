@@ -58,13 +58,13 @@ class AdminProductController
             }
             if (empty($km_sp)) {
                 // $errors['km_sp'] = 'Khuyến mãi sản phẩm không được để trống!';
-                $km_sp = null;
+                $km_sp = 0;
             }
 
             $img_sp = $_FILES['img_sp'];
             if ($img_sp['error'] == 0) {
                 $extension = pathinfo($img_sp['name'], PATHINFO_EXTENSION);
-                if (!in_array(strtolower($extension), ['jpg', 'png', 'jpeg', 'gif'])) {
+                if (!in_array(strtolower($extension), ['jpg', 'png', 'jpeg', 'gif', 'webp'])) {
                     $errors['img_sp'] = 'Ảnh không đúng định dạng!';
                 }
             } else {
@@ -144,7 +144,7 @@ class AdminProductController
             // Kiểm tra ảnh nếu người dùng chọn ảnh mới
             if ($img_sp['error'] == 0) {
                 $extension = pathinfo($img_sp['name'], PATHINFO_EXTENSION);
-                if (!in_array(strtolower($extension), ['jpg', 'png', 'jpeg', 'gif'])) {
+                if (!in_array(strtolower($extension), ['jpg', 'png', 'jpeg', 'gif', 'webp'])) {
                     $errors['img_sp'] = 'Ảnh không đúng định dạng!';
                 }
             }
