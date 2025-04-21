@@ -16,7 +16,8 @@
       <div class="row mb-2">
         <div class="col-sm-6">
           <h1><a
-              href="<?= BASE_URL_ADMIN . '?act=listUser' ?>">Quản Lý Tài Khoản</a></h1>
+              href="<?= BASE_URL_ADMIN . '?act=listUser' ?>">Quản
+              Lý Tài Khoản</a></h1>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -27,8 +28,6 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-
-          
           <div class="card">
             <!-- /.card-header -->
             <div class="card-body">
@@ -38,13 +37,12 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Địa chỉ</th>
-                    <th>email</th>
+                    <th>Email</th>
                     <th>Sđt</th>
                     <th>Mật khẩu</th>
-                    
+                    <th>Trạng thái</th>
                     <th>Ngày Tạo</th>
                     <th>Ngày update</th>
-                    
                     <th>Chức Năng</th>
                   </tr>
                 </thead>
@@ -59,44 +57,52 @@
                     </td>
                     <td><?= $User['email'] ?>
                     </td>
-                    <td><?= $User['sdt'] ?>
-                    </td>
+                    <td><?= $User['sdt'] ?></td>
                     <td><?= $User['mat_khau'] ?>
                     </td>
-                    
+                    <td>
+                      <?php
+                        echo $User['trang_thai'] === 1 ? '<span class="badge badge-danger">Bị cấm</span>' : '<span class="badge badge-success">Hoạt động</span>';
+                      ?>
+                    </td>
                     <td><?= $User['ngay_tao'] ?>
                     </td>
-                    <td><?= $User['ngay_update'] ?>
-                    </td> 
                     <td>
-                      <a href="<?= BASE_URL_ADMIN .'?act=deleteUser&id='.$User['tk_id'] ?>"
-                        onclick="return confirm('Bạn có chắc chắn xóa hay không?')"><button
-                          class="btn btn-danger">Xóa</button></a>
+                      <?= $User['ngay_update'] ?>
                     </td>
-
+                    <td>
+                      <?php if ($User['trang_thai'] === 1): ?>
+                      <a href="<?= BASE_URL_ADMIN . '?act=unbanUser&id=' . $User['tk_id'] ?>"
+                        onclick="return confirm('Bạn có chắc chắn muốn bỏ cấm tài khoản này?')">
+                        <button class="btn btn-success btn-sm">Bỏ cấm</button>
+                      </a>
+                      <?php else: ?>
+                      <a href="<?= BASE_URL_ADMIN . '?act=banUser&id=' . $User['tk_id'] ?>"
+                        onclick="return confirm('Bạn có chắc chắn muốn cấm tài khoản này?')">
+                        <button class="btn btn-warning btn-sm">Cấm</button>
+                      </a>
+                      <?php endif; ?>
+                    </td>
                   </tr>
                   <?php endforeach ?>
                 </tbody>
                 <tfoot>
-                <tr>
+                  <tr>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Địa chỉ</th>
-                    <th>email</th>
+                    <th>Email</th>
                     <th>Sđt</th>
                     <th>Mật khẩu</th>
-                  
+                    <th>Trạng thái</th>
                     <th>Ngày Tạo</th>
                     <th>Ngày update</th>
-                    
                     <th>Chức Năng</th>
                   </tr>
                 </tfoot>
               </table>
             </div>
             <!-- /.card-body -->
-
-
           </div>
           <!-- /.card -->
         </div>

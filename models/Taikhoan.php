@@ -12,25 +12,36 @@ class Taikhoan
     public function checkLogin($email, $mat_khau)
     {
         try {
-            $sql = "SELECT * FROM taikhoan WHERE email= :email";
+            $sql = "SELECT * FROM taikhoan WHERE email = :email";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute(['email' => $email]);
             $taikhoan = $stmt->fetch();
-            // var_dump($taikhoan);
+
             if ($email == "" || $mat_khau == "") {
                 return "Vui lòng nhập đầy đủ email và mật khẩu!";
-            } elseif (($email === $taikhoan['email']) && ($mat_khau === $taikhoan['mat_khau'])) {
-                if ($taikhoan['role'] === 0) {
-                    return $taikhoan['email']; // đăng nhập vào trang admin
+            }
 
+            if (!$taikhoan) {
+                return "Sai tài khoản hoặc mật khẩu!";
+            }
+
+            // Kiểm tra trạng thái tài khoản
+            if ($taikhoan['trang_thai'] === 1) {
+                return "Tài khoản của bạn đã bị cấm!";
+            }
+
+            // Kiểm tra email và mật khẩu
+            if ($email === $taikhoan['email'] && $mat_khau === $taikhoan['mat_khau']) {
+                if ($taikhoan['role'] === 0) {
+                    return $taikhoan['email']; // Đăng nhập vào trang admin
                 } else {
-                    return 'Trang client'; // đăng nhập vào trang client
+                    return 'Trang client'; // Đăng nhập vào trang client
                 }
             } else {
                 return "Sai tài khoản hoặc mật khẩu!";
             }
         } catch (Exception $e) {
-            echo 'Lỗi checkLogin() '.$e->getMessage();
+            echo 'Lỗi checkLogin(): ' . $e->getMessage();
             return false;
         }
     }

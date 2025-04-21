@@ -58,7 +58,9 @@ match ($act) {
 
     // router user
     'listUser' => (new AdminUserController())->listUser(),
-    'deleteUser' => (new AdminUserController())->deleteUser(),
+    // 'deleteUser' => (new AdminUserController())->deleteUser(),
+    'banUser' => (new AdminUserController())->banUser(),
+    'unbanUser' => (new AdminUserController())->unbanUser(),
 
     // router Evaluation
     'listEvaluation' => (new AdminEvaluationController())->listEvaluation(),

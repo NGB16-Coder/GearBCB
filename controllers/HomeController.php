@@ -72,46 +72,47 @@ class HomeController
     }
 
     public function dangNhap()
-    {
+{
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // Lấy email và mật khẩu gửi từ form
+        $email = $_POST['email'];
+        $mat_khau = $_POST['mat_khau'];
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // lấy email và pass gửi lên form
-            $email = $_POST['email'];
-            $mat_khau = $_POST['mat_khau'];
-            // var_dump($email);die;
-            // Ghi nhớ tài khoản
-            if (isset($_POST['rememberMe'])) {
-                setcookie("email", $email, time() + 86400 * 7);
-                setcookie("mat_khau", $mat_khau, time() + 86400 * 7);
-            }
-
-            // Kiểm tra thông tin đăng nhập
-            $taikhoan = $this->taikhoan->checkLogin($email, $mat_khau);
-            // var_dump($email, $mat_khau);die;
-            // var_dump($taikhoan);
-            // die;
-            if ($taikhoan === $email) { // đăng nhập thành công
-                // Lưu thông tin vào session
-                $_SESSION['taikhoan_admin'] = $taikhoan;
-                // var_dump($_SESSION['taikhoan_admin']);die;
-                header('location:'. BASE_URL_ADMIN);
-                exit();
-            } elseif ($taikhoan == 'Trang client') {
-                $_SESSION['taikhoan'] = $email;
-                echo '<script language="javascript">alert("Đăng nhập thành công!"); window.location="?act=trang-chu";</script>';
-                // header('location:'. BASE_URL);
-                exit();
-            } else {
-                // Lỗi thì lưu vào session
-                $_SESSION['error'] = $taikhoan;
-
-                $_SESSION['flash'] = true;
-                header('location:'.BASE_URL . '?act=dang-nhap');
-                exit();
-            }
+        // Ghi nhớ tài khoản
+        if (isset($_POST['rememberMe'])) {
+            setcookie("email", $email, time() + 86400 * 7);
+            setcookie("mat_khau", $mat_khau, time() + 86400 * 7);
         }
-        deleteSessionError();
+
+        // Kiểm tra thông tin đăng nhập
+        $taikhoan = $this->taikhoan->checkLogin($email, $mat_khau);
+
+        // Xử lý kết quả từ checkLogin
+        if ($taikhoan === $email) { // Đăng nhập thành công (admin)
+            // Lưu thông tin vào session
+            $_SESSION['taikhoan_admin'] = $taikhoan;
+            header('location: ' . BASE_URL_ADMIN);
+            exit();
+        } elseif ($taikhoan === 'Trang client') { // Đăng nhập thành công (client)
+            $_SESSION['taikhoan'] = $email;
+            echo '<script language="javascript">alert("Đăng nhập thành công!"); window.location="?act=trang-chu";</script>';
+            exit();
+        } elseif ($taikhoan === 'Tài khoản của bạn đã bị cấm!') { // Tài khoản bị cấm
+            $_SESSION['error'] = $taikhoan;
+            $_SESSION['flash'] = true;
+            echo '<script language="javascript">alert("Tài khoản của bạn đã bị cấm \ndo vi phạm quy tắc của chúng tôi!"); window.location="?act=dang-nhap";</script>';
+            exit();
+        } else { // Lỗi đăng nhập khác (email/mật khẩu sai, nhập thiếu, v.v.)
+            $_SESSION['error'] = $taikhoan;
+            $_SESSION['flash'] = true;
+            header('location: ' . BASE_URL . '?act=dang-nhap');
+            exit();
+        }
     }
+
+    // Xóa session lỗi nếu không phải POST
+    deleteSessionError();
+}
 
     public function formDangKy()
     {
