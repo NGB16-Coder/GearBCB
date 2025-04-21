@@ -47,6 +47,7 @@
                     <th>Giá KM</th>
                     <th>Số lượng</th>
                     <th>Trạng thái</th>
+                    <th>Ẩn/Hiện</th>
                     <th>Thao tác</th>
                   </tr>
                 </thead>
@@ -70,7 +71,7 @@
                       <?= number_format($product["gia_sp"]) ?>
                     </td>
                     <td>
-                      <?= number_format($product["km_sp"]?: 0) ?>
+                      <?= number_format($product["km_sp"] ?: 0) ?>
                     </td>
                     <td>
                       <?= number_format($product["so_luong"]) ?>
@@ -79,13 +80,26 @@
                       <?= $product["so_luong"] > 0 ? "<p style='color:green;'>Còn hàng</p>" : "<p style='color:red; font-weight:700;'>Hết hàng</p>" ?>
                     </td>
                     <td>
+                      <?php
+                        echo $product['an_hien'] === 0 ? '<span class="badge badge-danger">Bị Ẩn</span>' : '<span class="badge badge-success">Hiện</span>';
+                      ?>
+                    </td>
+                    <td>
                       <a
                         href="<?= BASE_URL_ADMIN.'?act=formEditProduct&id='.$product['sp_id']; ?>"><button
                           class="btn btn-warning">Sửa</button></a>
 
-                      <a href="<?= BASE_URL_ADMIN.'?act=xoaProduct&id='.$product['sp_id']; ?>"
-                        onclick="return confirm('Bạn có chắc chắn xóa hay không?')"><button
-                          class="btn btn-danger">Xóa</button></a>
+                      <?php if ($product['an_hien'] === 0): ?>
+                      <a href="<?= BASE_URL_ADMIN . '?act=showProduct&id=' . $product['sp_id'] ?>"
+                        onclick="return confirm('Bạn có chắc chắn muốn ẩn sản phẩm này?')">
+                        <button class="btn btn-success btn-sm">Hiện</button>
+                      </a>
+                      <?php else: ?>
+                      <a href="<?= BASE_URL_ADMIN . '?act=hideProduct&id=' . $product['sp_id'] ?>"
+                        onclick="return confirm('Bạn có chắc chắn muốn hiển thị sản phẩm này?')">
+                        <button class="btn btn-danger btn-sm">Ẩn</button>
+                      </a>
+                      <?php endif; ?>
                     </td>
                   </tr>
                   <?php endforeach; ?>

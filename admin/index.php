@@ -53,6 +53,8 @@ match ($act) {
     'formEditProduct' => (new AdminProductController())->formEditProduct(),
     'editProduct' => (new AdminProductController())->editProduct(),
     'xoaProduct' => (new AdminProductController())->xoaProduct(),
+    'showProduct' => (new AdminProductController())->showProduct(),
+    'hideProduct' => (new AdminProductController())->hideProduct(),
     // 'formAddSize' => (new AdminProductController())->formAddSize(),
     // 'addSize' => (new AdminProductController())->addSize(),
 

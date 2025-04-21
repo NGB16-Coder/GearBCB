@@ -113,17 +113,34 @@ class AdminProduct
         }
     }
 
-    public function checkSize($sp_id)
+    public function showProduct($sp_id)
     {
         try {
-            $sql = "SELECT size_id FROM sp_bien_the WHERE sp_id = :sp_id";
+            $sql = "UPDATE san_pham SET an_hien = 1 WHERE sp_id = :sp_id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
                 ':sp_id' => $sp_id
             ]);
-            return $stmt->fetchAll();
+
+            return true;
         } catch (Exception $e) {
-            echo 'Lỗi checkSize() '.$e->getMessage();
+            echo 'Lỗi banUser(): ' . $e->getMessage();
+            return false;
+        }
+    }
+    public function hideProduct($sp_id)
+    {
+        try {
+            $sql = "UPDATE san_pham SET an_hien = 0 WHERE sp_id = :sp_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':sp_id' => $sp_id
+            ]);
+
+            return true;
+        } catch (Exception $e) {
+            echo 'Lỗi unbanUser(): ' . $e->getMessage();
+            return false;
         }
     }
 }

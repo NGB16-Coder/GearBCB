@@ -184,4 +184,30 @@ class AdminProductController
         header('location: ' . BASE_URL_ADMIN . '?act=listProduct');
         exit();
     }
+    public function showProduct()
+    {
+        $sp_id = $_GET['id'];
+        $product = $this->modelProduct->getSanPham($sp_id);
+
+        if ($product) {
+            deleteFile($product['img_sp']);
+            $this->modelProduct->showProduct($sp_id);
+        }
+        header('location: ' . BASE_URL_ADMIN . '?act=listProduct');
+        exit();
+
+    }
+    public function hideProduct()
+    {
+        $sp_id = $_GET['id'];
+        $product = $this->modelProduct->getSanPham($sp_id);
+
+        if ($product) {
+            deleteFile($product['img_sp']);
+            $this->modelProduct->hideProduct($sp_id);
+        }
+        header('location: ' . BASE_URL_ADMIN . '?act=listProduct');
+        exit();
+
+    }
 }
