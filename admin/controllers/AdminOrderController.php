@@ -1,5 +1,7 @@
 <?php
-class AdminOrderController {
+
+class AdminOrderController
+{
     public $modelOrder;
 
     public function __construct()
@@ -11,31 +13,35 @@ class AdminOrderController {
         $listOrder = $this->modelOrder->getAllOrder();
         // var_dump($listOrder);die;
         require_once "./views/manageOrder/listOrder.php";
+        unset($_SESSION['error']);
         deleteSessionError(); // xóa session sau khi load trang
     }
 
-    public function detailOrder(){
+    public function detailOrder()
+    {
         $order_id = (int)$_GET['id'];
         $detailDonHang = $this->modelOrder->getDetailOrder($order_id);
         $productDonHang = $this->modelOrder->getProductOrder($order_id);
         // var_dump($productDonHang);die;
-        if($detailDonHang && $productDonHang ){
+        if ($detailDonHang && $productDonHang) {
             require_once "./views/manageOrder/chitietOrder.php";
-        }else{
+        } else {
             header('location: ' . BASE_URL_ADMIN . '?act=listOrder');
+            exit;
         }
     }
 
-    public function editTrangThai(){
+    public function editTrangThai()
+    {
         $order_id = $_GET['id'];
         // var_dump($order_id);die;
         $editTrangThai = $this->modelOrder->editTrangThai($order_id);
-        if($editTrangThai){
-            header('location: ' . BASE_URL_ADMIN . '?act=listOrder');
-            exit;
-        }else{
-            header('location: ' . BASE_URL_ADMIN . '?act=listOrder');
-            exit;
+        if ($editTrangThai) {
+            $_SESSION['success'] = $editTrangThai;
+        } else {
+            $_SESSION['loi'] = $editTrangThai;
         }
+        header('location: ' . BASE_URL_ADMIN . '?act=listOrder');
+        exit;
     }
 }

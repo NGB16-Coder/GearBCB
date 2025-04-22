@@ -17,7 +17,7 @@ class Product
             FROM san_pham 
             INNER JOIN danh_muc ON san_pham.dm_id = danh_muc.dm_id
             WHERE san_pham.an_hien = 1
-            ORDER BY san_pham.ngay_tao';
+            ORDER BY san_pham.ngay_tao DESC';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();

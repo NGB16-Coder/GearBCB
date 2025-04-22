@@ -33,6 +33,7 @@ class Taikhoan
             // Kiểm tra email và mật khẩu
             if ($email === $taikhoan['email'] && $mat_khau === $taikhoan['mat_khau']) {
                 if ($taikhoan['role'] === 0) {
+                    
                     return $taikhoan['email']; // Đăng nhập vào trang admin
                 } else {
                     return 'Trang client'; // Đăng nhập vào trang client

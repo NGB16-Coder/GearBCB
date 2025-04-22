@@ -122,15 +122,39 @@
                                             <?php if ($order['trang_thai'] == 3) { ?>
                                             <?php if ($allRatedStatus[$order['order_id']]) { ?>
                                             <a href="<?= BASE_URL.'?act=chi-tiet-don-hang&id='.$order['order_id'] ?>"
-                                                class="btn btn-primary">Xem Chi Tiết</a>
+                                                class="btn btn-primary btn-sm">Xem Chi Tiết</a>
                                             <?php } else { ?>
                                             <a href="<?= BASE_URL.'?act=danh-gia&tk_id='.$tk_id.'&order_id='.$order['order_id'] ?>"
                                                 class="btn btn-warning mt-1">Đánh Giá</a>
                                             <?php } ?>
                                             <?php } else { ?>
                                             <a href="<?= BASE_URL.'?act=chi-tiet-don-hang&id='.$order['order_id'] ?>"
-                                                class="btn btn-primary">Xem Chi Tiết</a>
+                                                class="btn btn-primary btn-sm">Xem Chi Tiết</a>
                                             <?php } ?>
+                                            <?php if ($order['trang_thai'] == 1): ?>
+                                            <form
+                                                action="<?= BASE_URL . '?act=cancel-order' ?>"
+                                                method="POST">
+                                                <input type="hidden" name="order_id"
+                                                    value="<?= $order['order_id'] ?>">
+                                                <input type="hidden" name="tk_id"
+                                                    value="<?= $tk_id ?>">
+                                                <button type="submit" class="btn btn-danger btn-sm mt-1"
+                                                    onclick="return confirm('Hủy đơn hàng này?')">Hủy</button>
+                                            </form>
+                                            <?php elseif ($order['trang_thai'] == 2): ?>
+                                            <form
+                                                action="<?= BASE_URL . '?act=confirm-received' ?>"
+                                                method="POST">
+                                                <input type="hidden" name="order_id"
+                                                    value="<?= $order['order_id'] ?>">
+                                                <input type="hidden" name="tk_id"
+                                                    value="<?= $tk_id ?>">
+                                                <button type="submit" class="btn btn-success btn-sm mt-1"
+                                                    onclick="return confirm('Xác nhận đã nhận hàng?')">Đã nhận
+                                                    hàng</button>
+                                            </form>
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>
@@ -163,7 +187,30 @@
 
     <!-- JS
 ============================================ -->
-
+    <!-- Hiển thị thông báo -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <?php if (isset($_SESSION['success'])): ?>
+    <script>
+        Swal.fire({
+            title: 'Thành công',
+            text: '<?= addslashes($_SESSION['success']) ?>',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    </script>
+    <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+    <?php if (isset($_SESSION['error'])): ?>
+    <script>
+        Swal.fire({
+            title: 'Lỗi',
+            text: '<?= addslashes($_SESSION['error']) ?>',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    </script>
+    <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
     <!-- Modernizer JS -->
     <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <!-- jQuery JS -->

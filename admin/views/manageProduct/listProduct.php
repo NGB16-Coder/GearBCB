@@ -92,12 +92,12 @@
                       <?php if ($product['an_hien'] === 0): ?>
                       <a href="<?= BASE_URL_ADMIN . '?act=showProduct&id=' . $product['sp_id'] ?>"
                         onclick="return confirm('Bạn có chắc chắn muốn ẩn sản phẩm này?')">
-                        <button class="btn btn-success btn-sm">Hiện</button>
+                        <button class="btn btn-success btn-sm mt-1">Hiện</button>
                       </a>
                       <?php else: ?>
                       <a href="<?= BASE_URL_ADMIN . '?act=hideProduct&id=' . $product['sp_id'] ?>"
                         onclick="return confirm('Bạn có chắc chắn muốn hiển thị sản phẩm này?')">
-                        <button class="btn btn-danger btn-sm">Ẩn</button>
+                        <button class="btn btn-danger btn-sm mt-1">Ẩn</button>
                       </a>
                       <?php endif; ?>
                     </td>
@@ -114,6 +114,7 @@
                     <th>Giá KM</th>
                     <th>Số lượng</th>
                     <th>Trạng thái</th>
+                    <th>Ẩn/Hiện</th>
                     <th>Thao tác</th>
                   </tr>
                 </tfoot>

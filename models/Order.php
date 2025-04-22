@@ -182,6 +182,62 @@ class OrderModel
         }
     }
 
+    public function confirmReceived($order_id)
+    {
+        try {
+            // Lấy thông tin đơn hàng
+            $order = $this->getDetailOrder($order_id);
+            if (!$order) {
+                return "Đơn hàng không tồn tại!";
+            }
 
+            // Kiểm tra trạng thái
+            if ($order['trang_thai'] != 2) {
+                return "Đơn hàng không ở trạng thái đang giao hàng!";
+            }
+
+            // Cập nhật trạng thái sang Đã giao hàng (3)
+            $sql = "UPDATE don_hang SET trang_thai = :trang_thai WHERE order_id = :order_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':trang_thai' => 3,
+                ':order_id' => $order_id
+            ]);
+
+            return "Xác nhận nhận hàng thành công!";
+        } catch (Exception $e) {
+            echo 'Lỗi confirmReceived(): ' . $e->getMessage();
+            return "Lỗi khi xác nhận nhận hàng!";
+        }
+    }
+
+    public function cancelOrder($order_id)
+    {
+        try {
+            // Lấy thông tin đơn hàng
+            $order = $this->getDetailOrder($order_id);
+            if (!$order) {
+                return "Đơn hàng không tồn tại!";
+            }
+
+            // Kiểm tra trạng thái
+            if ($order['trang_thai'] != 1) {
+                return "Đơn hàng không ở trạng thái chờ xác nhận!";
+            }
+
+            // Cập nhật trạng thái sang Hủy (4)
+            $sql = "UPDATE don_hang SET trang_thai = :trang_thai WHERE order_id = :order_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':trang_thai' => 4,
+                ':order_id' => $order_id
+            ]);
+
+            return "Hủy đơn hàng thành công!";
+        } catch (Exception $e) {
+            echo 'Lỗi cancelOrder(): ' . $e->getMessage();
+            return "Lỗi khi hủy đơn hàng!";
+        }
+    }
 
 }

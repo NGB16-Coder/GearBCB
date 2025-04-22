@@ -79,7 +79,7 @@
                       <?php else: ?>
                       <a href="<?= BASE_URL_ADMIN . '?act=banUser&id=' . $User['tk_id'] ?>"
                         onclick="return confirm('Bạn có chắc chắn muốn cấm tài khoản này?')">
-                        <button class="btn btn-warning btn-sm">Cấm</button>
+                        <button class="btn btn-danger btn-sm">Cấm</button>
                       </a>
                       <?php endif; ?>
                     </td>

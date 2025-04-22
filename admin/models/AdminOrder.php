@@ -62,26 +62,29 @@ class AdminOrder
     public function editTrangThai($order_id)
     {
         try {
-            $sql = "SELECT don_hang.trang_thai FROM don_hang WHERE order_id = :order_id";
+            // Lấy thông tin đơn hàng
+            $order = $this->getDetailOrder($order_id);
+            if (!$order) {
+                return "Đơn hàng không tồn tại!";
+            }
+
+            // Kiểm tra trạng thái
+            if ($order['trang_thai'] != 1) {
+                return "Đơn hàng không ở trạng thái chờ xác nhận!";
+            }
+
+            // Cập nhật trạng thái sang Đang giao hàng (2)
+            $sql = "UPDATE don_hang SET trang_thai = :trang_thai WHERE order_id = :order_id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
+                ':trang_thai' => 2,
                 ':order_id' => $order_id
             ]);
-            $checkOrder = $stmt->fetch();
-            // var_dump($checkOrder['trang_thai']);die;
-            if ($checkOrder['trang_thai'] <= 4) {
-                $sql = "UPDATE don_hang SET trang_thai = :trang_thai + 1  WHERE order_id = :order_id ";
-                $stmt = $this->conn->prepare($sql);
-                $stmt->execute([
-                    ':order_id' => $order_id,
-                    ':trang_thai' => $checkOrder['trang_thai'],
-                ]);
-                return true;
-            } else {
-                return false;
-            }
+
+            return "Xác nhận đơn hàng thành công!";
         } catch (Exception $e) {
-            echo 'Lỗi getProductOrder() '.$e->getMessage();
+            echo 'Lỗi confirmOrder(): ' . $e->getMessage();
+            return "Lỗi khi xác nhận đơn hàng!";
         }
     }
 }

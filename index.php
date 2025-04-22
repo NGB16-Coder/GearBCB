@@ -47,6 +47,8 @@ match ($act) {
     'chi-tiet-don-hang' => (new OrderController())->detailOrder(),
     'info-Acc' => (new HomeController())-> infoAcc(),
     'edit-thong-tin' => (new HomeController())-> editInfo(),
+    'cancel-order' => (new OrderController())->cancelOrder(),
+    'confirm-received' => (new OrderController())->confirmReceived(),
 
     // chuc nang binh luan
     'addBinhLuan' => (new HomeController())->addBinhLuan(),

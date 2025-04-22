@@ -31,7 +31,7 @@ function uploadFile($file, $folderUpload)
     }
 
     // Kiểm tra loại tệp và kích thước (bạn có thể thêm điều kiện tùy theo yêu cầu)
-    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
     $fileExtension = pathinfo($file['name'], PATHINFO_EXTENSION);
     if (!in_array(strtolower($fileExtension), $allowedExtensions)) {
         return null; // Trả về null nếu loại tệp không hợp lệ
@@ -84,10 +84,12 @@ function deleteSessionError()
 }
 
 // Bắt buộc login để vào admin
-// function checkLoginAdmin()
-// {
-//     if (!isset($_SESSION['user_admin'])) { // Không có session admin thì về trang login
-//         header('location:'.BASE_URL.'?act=dang-nhap');
-//         exit();
-//     }
-// }
+function checkLoginAdmin()
+{
+    // Kiểm tra session admin
+    if (!isset($_SESSION['taikhoan_admin']) || $_SESSION['taikhoan_admin'] == null) {
+        $_SESSION['error'] = "Bạn không có quyền truy cập admin! Vui lòng đăng nhập.";
+        header('Location: ' . BASE_URL . '?act=dang-nhap');
+        exit();
+    }
+}

@@ -24,6 +24,8 @@ class AdminProductController
     {
         $listCategory = $this->modelCategory->getAllCategory();
         require_once "./views/manageProduct/addProduct.php";
+        unset($_SESSION['error']);
+        unset($_SESSION['old']);
         deleteSessionError();
     }
 
@@ -35,10 +37,10 @@ class AdminProductController
             $km_sp = $_POST['km_sp'] ?? '';
             $so_luong = $_POST['so_luong'] ?? '';
             $dm_id = $_POST['dm_id'] ?? '';
-            $mo_ta = $_POST['mo_ta'] ?? '';
+            $mo_ta = $_POST['mo_ta'] ?? null;
 
             $errors = [];
-
+            
             // Validate
             if (empty($ten_sp)) {
                 $errors['ten_sp'] = 'Tên sản phẩm không được để trống!';
@@ -52,15 +54,10 @@ class AdminProductController
             if (empty($dm_id)) {
                 $errors['dm_id'] = 'Danh mục sản phẩm bắt buộc chọn!';
             }
-            if (empty($mo_ta)) {
-                // $errors['mo_ta'] = 'Mô tả sản phẩm không được để trống!';
-                $mo_ta = "";
-            }
             if (empty($km_sp)) {
-                // $errors['km_sp'] = 'Khuyến mãi sản phẩm không được để trống!';
                 $km_sp = 0;
             }
-
+            // var_dump($km_sp);die;
             $img_sp = $_FILES['img_sp'];
             if ($img_sp['error'] == 0) {
                 $extension = pathinfo($img_sp['name'], PATHINFO_EXTENSION);
@@ -100,6 +97,7 @@ class AdminProductController
         $listCategory = $this->modelCategory->getAllCategory();
         if ($product) {
             require_once "./views/manageProduct/editProduct.php";
+            unset($_SESSION['error']);
             deleteSessionError();
         } else {
             header('location: ' . BASE_URL_ADMIN . '?act=listProduct');
@@ -190,7 +188,7 @@ class AdminProductController
         $product = $this->modelProduct->getSanPham($sp_id);
 
         if ($product) {
-            deleteFile($product['img_sp']);
+            // deleteFile($product['img_sp']);
             $this->modelProduct->showProduct($sp_id);
         }
         header('location: ' . BASE_URL_ADMIN . '?act=listProduct');
@@ -203,7 +201,7 @@ class AdminProductController
         $product = $this->modelProduct->getSanPham($sp_id);
 
         if ($product) {
-            deleteFile($product['img_sp']);
+            // deleteFile($product['img_sp']);
             $this->modelProduct->hideProduct($sp_id);
         }
         header('location: ' . BASE_URL_ADMIN . '?act=listProduct');

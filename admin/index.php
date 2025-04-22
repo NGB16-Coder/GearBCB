@@ -5,7 +5,7 @@ session_start();
 // Require file Common
 require_once '../commons/env.php'; // Khai báo biến môi trường
 require_once '../commons/function.php'; // Hàm hỗ trợ
-// checkLoginAdmin();
+checkLoginAdmin();
 // Require toàn bộ file Controllers
 require_once './controllers/AdminCategoryController.php';
 require_once './controllers/AdminProductController.php';
@@ -32,9 +32,8 @@ $act = $_GET['act'] ?? '/';
 // Để bảo bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
 
 match ($act) {
-
-    // router danh mục
     '/' => (new HomeAdminController())->home(),
+    // router danh mục
     'listCategory' => (new AdminCategoryController())->listCategory(),
     'formAddCategory' => (new AdminCategoryController())->formAddCategory(),
     'addCategory' => (new AdminCategoryController())->addCategory(),
@@ -74,4 +73,6 @@ match ($act) {
     'listComment' => (new AdminCommentController())->listComment(),
     'showComment' => (new AdminCommentController())->showComment(),
     'hideComment' => (new AdminCommentController())->hideComment(),
+
+    default => (new HomeAdminController())->home(),
 };

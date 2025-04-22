@@ -31,7 +31,7 @@
           <div class="card">
             <!-- /.card-header -->
             <div class="card-body">
-              <table class="table table-bordered dataTable table-striped" style="text-align:center;">
+              <table id="example1" class="table table-bordered dataTable table-striped" style="text-align:center;">
                 <thead>
                   <tr>
                     <th>Mã đơn hàng</th>
@@ -49,7 +49,7 @@
                 <tbody>
                   <?php foreach ($listOrder as $order): ?>
                   <tr>
-                    <td>
+                    <td>ĐH-
                       <?= $order['order_id'] ?>
                     </td>
                     <td>
@@ -74,20 +74,25 @@
                       <?= date('d/m/Y H:i', strtotime($order['ngay_dat'])) ?>
                     </td>
                     <td>
-                      <?php if($order['trang_thai'] == 1) {
-                          echo'<p class="alert alert-info">Chờ xác nhận</p>';
-                      } elseif($order['trang_thai'] == 2) {
-                          echo'<p class="alert alert-warning">Đang giao hàng</p>';
-                      } elseif($order['trang_thai'] == 3) {
-                          echo'<p class="alert alert-success">Đã giao hàng</p>';
-                      } else {
-                          echo'<p class="alert alert-danger">Đơn bị hủy</p>';
-                      } ?>
+                      <?php
+                switch ($order['trang_thai']) {
+                    case 1: echo '<span class="badge badge-warning">Chờ xác nhận</span>';
+                        break;
+                    case 2: echo '<span class="badge badge-info">Đang giao hàng</span>';
+                        break;
+                    case 3: echo '<span class="badge badge-success">Đã giao hàng</span>';
+                        break;
+                    case 4: echo '<span class="badge badge-danger">Hủy</span>';
+                        break;
+                }
+                      ?>
                     </td>
                     <td>
+                      <?php if ($order['trang_thai'] == 1): ?>
                       <a
                         href="<?= BASE_URL_ADMIN.'?act=update-trang-thai&id='.$order['order_id'] ?>"><button
-                          class="btn btn-primary">Cập nhật</button></a>
+                          class="btn btn-primary">Xác nhận</button></a>
+                      <?php endif; ?>
                       <a
                         href="<?= BASE_URL_ADMIN.'?act=detailOrder&id='.$order['order_id'] ?>"><button
                           class="btn btn-info mt-2">Chi tiết</button></a>
@@ -130,6 +135,30 @@
 <!-- Footer -->
 <?php include './views/layout/footer.php' ?>
 <!-- EndFooter -->
+<!-- Hiển thị thông báo -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<?php if (isset($_SESSION['success'])): ?>
+<script>
+  Swal.fire({
+    title: 'Thành công',
+    text: '<?= addslashes($_SESSION['success']) ?>',
+    icon: 'success',
+    confirmButtonText: 'OK'
+  });
+</script>
+<?php unset($_SESSION['success']); ?>
+<?php endif; ?>
+<?php if (isset($_SESSION['loi'])): ?>
+<script>
+  Swal.fire({
+    title: 'Lỗi',
+    text: '<?= addslashes($_SESSION['loi']) ?>',
+    icon: 'loi',
+    confirmButtonText: 'OK'
+  });
+</script>
+<?php unset($_SESSION['loi']); ?>
+<?php endif; ?>
 <!-- Page specific script -->
 <script>
   $(function() {

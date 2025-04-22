@@ -107,4 +107,48 @@ class OrderController
         require_once './views/danhGia.php';
     }
 
+    public function confirmReceived()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $order_id = $_POST['order_id'];
+            $tk_id = $_POST['tk_id'];
+            $result = $this->orderModel->confirmReceived($order_id);
+
+            if ($result === "Xác nhận nhận hàng thành công!") {
+                $_SESSION['success'] = $result;
+            } else {
+                $_SESSION['error'] = $result;
+            }
+
+            // Chuyển hướng về trang danh sách đơn hàng của người dùng
+            header('Location: ' . BASE_URL . '?act=lich-su-don&id=' . $tk_id);
+            exit();
+        }
+    }
+
+    /**
+     * Xử lý hủy đơn hàng
+     */
+    public function cancelOrder()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $order_id = $_POST['order_id'];
+            $tk_id = $_POST['tk_id'];
+            // var_dump($tk_id);die;
+            $result = $this->orderModel->cancelOrder($order_id);
+
+            if ($result === "Hủy đơn hàng thành công!") {
+                $_SESSION['success'] = $result;
+            } else {
+                $_SESSION['error'] = $result;
+            }
+
+            // Chuyển hướng về trang danh sách đơn hàng của người dùng
+            header('Location: ' . BASE_URL . '?act=lich-su-don&id=' . $tk_id);
+            exit();
+        }
+    }
+
 }

@@ -77,7 +77,7 @@
                   <?= $detailDonHang['email'] ?>
                   <br>
                   Phone:
-                  <?= $detailDonHang['sdt_nhan'] ?><br>
+                  <?= $detailDonHang['sdt_nhan'] ? $detailDonHang['sdt_nhan'] : $detailDonHang['sdt'] ?><br>
                 </address>
               </div>
               <!-- /.col -->
@@ -115,7 +115,6 @@
                       <th>#</th>
                       <th>Mã đơn hàng</th>
                       <th>Tên sản phẩm</th>
-                      <th>Size</th>
                       <th>Giá mua</th>
                       <th>Số lượng</th>
                     </tr>
@@ -135,10 +134,7 @@
                         <?= $sanpham['ten_sp'] ?>
                       </td>
                       <td>
-                        <?= $sanpham['size_value'] ?>
-                      </td>
-                      <td>
-                        <?= $sanpham['gia_mua'] ?>
+                        <?= number_format($sanpham['gia_mua']) ?>
                         VNĐ</td>
                       <td>
                         <?= $sanpham['so_luong_mua'] ?>
