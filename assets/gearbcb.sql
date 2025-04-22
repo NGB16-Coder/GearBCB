@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost:3306
--- Thời gian đã tạo: Th4 17, 2025 lúc 11:00 AM
+-- Thời gian đã tạo: Th4 22, 2025 lúc 05:20 AM
 -- Phiên bản máy phục vụ: 8.0.30
 -- Phiên bản PHP: 8.2.20
 
@@ -37,6 +37,13 @@ CREATE TABLE `binh_luan` (
   `ngay_update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `binh_luan`
+--
+
+INSERT INTO `binh_luan` (`bl_id`, `tk_id`, `sp_id`, `noi_dung`, `an_hien`, `ngay_tao`, `ngay_update`) VALUES
+(1, 4, 12, 'ốp xịn, đẹp', b'1', '2025-04-21 22:59:14', '2025-04-21 22:59:14');
+
 -- --------------------------------------------------------
 
 --
@@ -53,6 +60,17 @@ CREATE TABLE `chi_tiet_don_hang` (
   `ngay_update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `an_hien` bit(1) DEFAULT b'1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `chi_tiet_don_hang`
+--
+
+INSERT INTO `chi_tiet_don_hang` (`ctdh_id`, `order_id`, `sp_id`, `gia_mua`, `so_luong_mua`, `ngay_tao`, `ngay_update`, `an_hien`) VALUES
+(3, 2, 13, 1000000, 1, '2025-04-17 22:09:23', '2025-04-17 22:09:23', b'1'),
+(4, 3, 13, 1000000, 4, '2025-04-17 22:26:56', '2025-04-17 22:26:56', b'1'),
+(5, 3, 18, 299000, 6, '2025-04-17 22:26:56', '2025-04-17 22:26:56', b'1'),
+(6, 4, 15, 850000, 4, '2025-04-17 22:33:46', '2025-04-17 22:33:46', b'1'),
+(7, 4, 13, 1000000, 4, '2025-04-17 22:33:46', '2025-04-17 22:33:46', b'1');
 
 -- --------------------------------------------------------
 
@@ -91,8 +109,9 @@ CREATE TABLE `danh_muc` (
 --
 
 INSERT INTO `danh_muc` (`dm_id`, `ten_dm`, `an_hien`, `ngay_tao`, `ngay_update`) VALUES
-(43, 'Ốp điện thoại', b'1', '2025-04-16 12:26:26', '2025-04-16 12:26:26'),
-(44, 'Sạc điện thoại', b'1', '2025-04-17 16:18:41', '2025-04-17 16:18:41');
+(43, 'Ốp', b'1', '2025-04-16 12:26:26', '2025-04-16 12:26:26'),
+(44, 'Sạc', b'1', '2025-04-17 16:18:41', '2025-04-17 16:18:41'),
+(46, 'Gậy chụp ảnh', b'1', '2025-04-22 10:51:20', '2025-04-22 10:51:20');
 
 -- --------------------------------------------------------
 
@@ -114,6 +133,15 @@ CREATE TABLE `don_hang` (
   `ngay_update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `don_hang`
+--
+
+INSERT INTO `don_hang` (`order_id`, `tk_id`, `dia_chi_nhan`, `ten_nhan`, `sdt_nhan`, `ngay_dat`, `tong_so_luong`, `trang_thai`, `tong_tien`, `an_hien`, `ngay_update`) VALUES
+(2, 4, NULL, NULL, NULL, '2025-04-17 22:09:23', 1, 1, 1000000, b'1', '2025-04-22 10:01:33'),
+(3, 4, NULL, NULL, NULL, '2025-04-17 22:26:56', 10, 4, 5794000, b'1', '2025-04-22 10:22:22'),
+(4, 4, NULL, NULL, NULL, '2025-04-17 22:33:46', 8, 3, 7400000, b'1', '2025-04-22 10:17:16');
+
 -- --------------------------------------------------------
 
 --
@@ -129,6 +157,13 @@ CREATE TABLE `gio_hang` (
   `ngay_tao` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ngay_update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `gio_hang`
+--
+
+INSERT INTO `gio_hang` (`id`, `sp_id`, `tk_id`, `so_luong`, `an_hien`, `ngay_tao`, `ngay_update`) VALUES
+(10, 12, 4, 2, b'1', '2025-04-17 22:35:51', '2025-04-17 22:35:51');
 
 -- --------------------------------------------------------
 
@@ -175,12 +210,15 @@ CREATE TABLE `san_pham` (
 INSERT INTO `san_pham` (`sp_id`, `ten_sp`, `img_sp`, `mo_ta`, `trang_thai`, `dm_id`, `ngay_tao`, `ngay_update`, `an_hien`, `tong_dg`, `tong_so_sao`, `km_sp`, `gia_sp`, `so_luong`) VALUES
 (10, 'Ốp lưng iPhone 16 Pro Max', 'assets/img/product/1744781484_op-lung-iphone-16-pro-max-apple-silicone-magsafe_7_.jpg', 'Ốp lưng iPhone 16 Pro Max Apple MagSafe Clear nổi bật với màu sắc trong suốt, vừa bảo vệ tốt vừa giữ nguyên vẻ đẹp nguyên bản của iPhone 16 Pro Max. Ốp có kích thước mỏng, khối lượng nhẹ, vừa đảm bảo thẩm mỹ vừa đem đến trải nghiệm cầm nắm thoải mái. Sản phẩm ốp lưng Apple iPhone 16 Series hỗ trợ tính năng sạc không dây MagSafe, đồng thời ngăn trầy xước, hạn chế ố vàng hiệu quả. ', b'1', 43, '2025-04-16 12:31:24', '2025-04-16 12:31:24', b'1', NULL, NULL, 999000, 1250000, 123124),
 (12, 'Ốp lưng iPhone 16 Pro Max Apple With Magsafe Clear', 'assets/img/product/1744882078_op-lung-iphone-16-pro-max-apple-magsafe-clear.png', 'Ốp lưng iPhone 16 Pro Max Apple MagSafe Clear nổi bật với màu sắc trong suốt, vừa bảo vệ tốt vừa giữ nguyên vẻ đẹp nguyên bản của iPhone 16 Pro Max. Ốp có kích thước mỏng, khối lượng nhẹ, vừa đảm bảo thẩm mỹ vừa đem đến trải nghiệm cầm nắm thoải mái. Sản phẩm ốp lưng Apple iPhone 16 Series hỗ trợ tính năng sạc không dây MagSafe, đồng thời ngăn trầy xước, hạn chế ố vàng hiệu quả. ', b'1', 43, '2025-04-17 16:27:58', '2025-04-17 16:27:58', b'1', NULL, NULL, 1200000, 1490000, 123566),
-(13, 'Ốp lưng iPhone 16 Pro Max Spigen Ultra Hybrid With Magsafe Zero One', 'assets/img/product/1744882464_op-lung-iphone-16-pro-max-spigen-ultra-hybrid-magsafe-zero-one_8_.jpg', 'Ốp lưng iPhone 16 Pro Max Apple MagSafe Clear nổi bật với màu sắc trong suốt, vừa bảo vệ tốt vừa giữ nguyên vẻ đẹp nguyên bản của iPhone 16 Pro Max. Ốp có kích thước mỏng, khối lượng nhẹ, vừa đảm bảo thẩm mỹ vừa đem đến trải nghiệm cầm nắm thoải mái. Sản phẩm ốp lưng Apple iPhone 16 Series hỗ trợ tính năng sạc không dây MagSafe, đồng thời ngăn trầy xước, hạn chế ố vàng hiệu quả. ', b'1', 43, '2025-04-17 16:34:24', '2025-04-17 16:34:24', b'1', NULL, NULL, 1000000, 1400000, 55555),
+(13, 'Ốp lưng iPhone 16 Pro Max Spigen Ultra Hybrid With Magsafe Zero One', 'assets/img/product/1744882464_op-lung-iphone-16-pro-max-spigen-ultra-hybrid-magsafe-zero-one_8_.jpg', 'Ốp lưng iPhone 16 Pro Max Apple MagSafe Clear nổi bật với màu sắc trong suốt, vừa bảo vệ tốt vừa giữ nguyên vẻ đẹp nguyên bản của iPhone 16 Pro Max. Ốp có kích thước mỏng, khối lượng nhẹ, vừa đảm bảo thẩm mỹ vừa đem đến trải nghiệm cầm nắm thoải mái. Sản phẩm ốp lưng Apple iPhone 16 Series hỗ trợ tính năng sạc không dây MagSafe, đồng thời ngăn trầy xước, hạn chế ố vàng hiệu quả. ', b'1', 43, '2025-04-17 16:34:24', '2025-04-17 16:34:24', b'1', NULL, NULL, 1000000, 1400000, 55550),
 (14, 'Ốp lưng iPhone 16 Pro Max', 'assets/img/product/1744882502_op-lung-iphone-16-pro-max-apple-silicone-magsafe_3_.jpg', 'Ốp lưng iPhone 16 Pro Max Apple MagSafe Clear nổi bật với màu sắc trong suốt, vừa bảo vệ tốt vừa giữ nguyên vẻ đẹp nguyên bản của iPhone 16 Pro Max. Ốp có kích thước mỏng, khối lượng nhẹ, vừa đảm bảo thẩm mỹ vừa đem đến trải nghiệm cầm nắm thoải mái. Sản phẩm ốp lưng Apple iPhone 16 Series hỗ trợ tính năng sạc không dây MagSafe, đồng thời ngăn trầy xước, hạn chế ố vàng hiệu quả. ', b'1', 43, '2025-04-17 16:35:02', '2025-04-17 16:35:02', b'1', NULL, NULL, 899000, 1200000, 2354),
-(15, 'Củ sạc Samsung Type-C 45W kèm cáp C-C 5A 1.8M T4510', 'assets/img/product/1744882895_frame_41.jpg', 'Củ sạc Type C Samsung T4510 45W có kèm cáp là củ sạc được mong đợi nhất trong thời điểm hiện tại. Bởi đây chính là phiên bản sạc Samsung chính hãng dành cho mẫu điện thoại Samsung Galaxy S22 Ultra cực hot gần đây. Hãy xem điểm đặc biệt của củ sạc này là gì nhé!', b'1', 44, '2025-04-17 16:41:35', '2025-04-17 16:41:35', b'1', NULL, NULL, 850000, 1200000, 346534),
+(15, 'Củ sạc Samsung Type-C 45W kèm cáp C-C 5A 1.8M T4510', 'assets/img/product/1744882895_frame_41.jpg', 'Củ sạc Type C Samsung T4510 45W có kèm cáp là củ sạc được mong đợi nhất trong thời điểm hiện tại. Bởi đây chính là phiên bản sạc Samsung chính hãng dành cho mẫu điện thoại Samsung Galaxy S22 Ultra cực hot gần đây. Hãy xem điểm đặc biệt của củ sạc này là gì nhé!', b'1', 44, '2025-04-17 16:41:35', '2025-04-17 16:41:35', b'1', NULL, NULL, 850000, 1200000, 346530),
 (16, 'Củ sạc Baseus Super SI 25W 1 cổng kèm cáp Type-C to Type-C 1M', 'assets/img/product/1744883066_group_135_1.jpg', 'Củ sạc Type C Samsung T4510 45W có kèm cáp là củ sạc được mong đợi nhất trong thời điểm hiện tại. Bởi đây chính là phiên bản sạc Samsung chính hãng dành cho mẫu điện thoại Samsung Galaxy S22 Ultra cực hot gần đây. Hãy xem điểm đặc biệt của củ sạc này là gì nhé!', b'1', 44, '2025-04-17 16:44:26', '2025-04-17 16:44:26', b'1', NULL, NULL, 300000, 500000, 56645),
 (17, 'Sạc Trusmi cổng 1A1C PD 20W kèm cáp type-C to type-C 60W CH11 (EU)', 'assets/img/product/1744883136_cu-sac-trusmi-ch011-1a-1c-20w-kem-cap-type-c-to-type-c-60w-eu_2_.png', 'Củ sạc Type C Samsung T4510 45W có kèm cáp là củ sạc được mong đợi nhất trong thời điểm hiện tại. Bởi đây chính là phiên bản sạc Samsung chính hãng dành cho mẫu điện thoại Samsung Galaxy S22 Ultra cực hot gần đây. Hãy xem điểm đặc biệt của củ sạc này là gì nhé!', b'1', 44, '2025-04-17 16:45:36', '2025-04-17 16:45:36', b'1', NULL, NULL, 200000, 300000, 23223),
-(18, 'Sạc Trusmi cổng USB-C PD 20W kèm cáp type-C to Lightning 20W (EU) CH10', 'assets/img/product/1744883195_cu-sac-trusmi-type-c-pd-20w-kem-cap-type-c-to-lightning-20w-eu_2_.jpg', 'Củ sạc Type C Samsung T4510 45W có kèm cáp là củ sạc được mong đợi nhất trong thời điểm hiện tại. Bởi đây chính là phiên bản sạc Samsung chính hãng dành cho mẫu điện thoại Samsung Galaxy S22 Ultra cực hot gần đây. Hãy xem điểm đặc biệt của củ sạc này là gì nhé!', b'1', 44, '2025-04-17 16:46:35', '2025-04-17 16:46:35', b'1', NULL, NULL, 299000, 350000, 12356);
+(18, 'Sạc Trusmi cổng USB-C PD 20W kèm cáp type-C to Lightning 20W (EU) CH10', 'assets/img/product/1745289391_cu-sac-trusmi-type-c-pd-20w-kem-cap-type-c-to-lightning-20w-eu_2_.jpg', 'Củ sạc Type C Samsung T4510 45W có kèm cáp là củ sạc được mong đợi nhất trong thời điểm hiện tại. Bởi đây chính là phiên bản sạc Samsung chính hãng dành cho mẫu điện thoại Samsung Galaxy S22 Ultra cực hot gần đây. Hãy xem điểm đặc biệt của củ sạc này là gì nhé!', b'1', 44, '2025-04-17 16:46:35', '2025-04-17 16:46:35', b'1', NULL, NULL, 299000, 350000, 12350),
+(21, 'Gậy chụp ảnh Tripod WIWU Selfie Stick SE012', 'assets/img/product/1745294352_gay-chup-anh-tripod-wiwu-selfie-stick-se012_2_.webp', 'Gậy chụp ảnh Tripod Wiwu Selfie Stick SE012 được tạo nên từ nhựa ABS và hợp kim nhôm, có thể điều chỉnh chiều dài linh động bằng cách kéo ra hoặc thu vào. Gậy có độ dài tối đa là 1.8m nhờ đó người dùng có thể thu được nhiều khoảnh khắc ở nhiều góc chụp khác nhau', b'1', 46, '2025-04-22 10:59:12', '2025-04-22 10:59:12', b'1', NULL, NULL, 495000, 550000, 12356),
+(22, 'Gậy chụp ảnh Tripod WIWU DETACHABLE SE001', 'assets/img/product/1745294515_text_ng_n_39__14.webp', 'Gậy chụp ảnh Tripod Wiwu Detachable SE001 với thiết kế có thể tháo rời đáp ứng được nhiều nhu cầu chụp khác nhau của người dùng. gậy với kết nối bluetooth hỗ trợ chụp hình thông qua điều khiển từ xa ở khoảng cách tới 10m', b'1', 46, '2025-04-22 11:01:55', '2025-04-22 11:01:55', b'1', NULL, NULL, 200000, 250000, 12356),
+(23, 'Gậy chụp ảnh Tripod Wiwu Warrior SE013', 'assets/img/product/1745294890_text_ng_n_68__2_6.webp', 'Gậy chụp ảnh Tripod Wiwu Warrior SE013 là phụ kiện đa năng 3 trong 1 với thiết kế hiện đại, tích hợp chống rung và kết nối Bluetooth điều khiển từ xa', b'1', 46, '2025-04-22 11:08:10', '2025-04-22 11:08:10', b'1', NULL, NULL, NULL, 1150000, 123123);
 
 -- --------------------------------------------------------
 
@@ -213,16 +251,16 @@ CREATE TABLE `taikhoan` (
   `role` bit(1) DEFAULT b'1',
   `ngay_tao` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ngay_update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `an_hien` bit(1) DEFAULT b'1'
+  `trang_thai` bit(1) DEFAULT b'0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `taikhoan`
 --
 
-INSERT INTO `taikhoan` (`tk_id`, `ho_ten`, `dia_chi`, `email`, `sdt`, `mat_khau`, `role`, `ngay_tao`, `ngay_update`, `an_hien`) VALUES
-(1, 'Nguyễn Gia Bảo', 'Phương Canh', 'giabao16032005@gmail.com', '0833236944', 'tolabaoday', b'0', '2024-11-12 13:18:15', '2024-11-12 13:18:15', b'0'),
-(4, 'nguyễn văn b', 'abc123', 'nguyenvanb@gmail.com', '123123', '123123', b'1', '2024-11-20 11:30:56', '2024-11-12 11:30:56', b'1'),
+INSERT INTO `taikhoan` (`tk_id`, `ho_ten`, `dia_chi`, `email`, `sdt`, `mat_khau`, `role`, `ngay_tao`, `ngay_update`, `trang_thai`) VALUES
+(1, 'Nguyễn Gia Bảo', 'Phương Canh', 'admin@gmail.com', '0833236944', 'admin123', b'0', '2024-11-12 13:18:15', '2024-11-12 13:18:15', b'0'),
+(4, 'nguyễn văn b', 'abc123', 'nguyenvanb@gmail.com', '123123', '123123', b'1', '2024-11-20 11:30:56', '2024-11-12 11:30:56', b'0'),
 (5, 'nguyễn văn c', 'abc123', 'nguyenvanc@gmail.com', '123111', '123123', b'1', '2024-11-20 11:27:04', '2024-11-20 11:27:04', b'1');
 
 --
@@ -318,13 +356,13 @@ ALTER TABLE `taikhoan`
 -- AUTO_INCREMENT cho bảng `binh_luan`
 --
 ALTER TABLE `binh_luan`
-  MODIFY `bl_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `bl_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `chi_tiet_don_hang`
 --
 ALTER TABLE `chi_tiet_don_hang`
-  MODIFY `ctdh_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ctdh_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `danh_gia`
@@ -336,19 +374,19 @@ ALTER TABLE `danh_gia`
 -- AUTO_INCREMENT cho bảng `danh_muc`
 --
 ALTER TABLE `danh_muc`
-  MODIFY `dm_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `dm_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT cho bảng `don_hang`
 --
 ALTER TABLE `don_hang`
-  MODIFY `order_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `order_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `gio_hang`
 --
 ALTER TABLE `gio_hang`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `list_img`
@@ -360,7 +398,7 @@ ALTER TABLE `list_img`
 -- AUTO_INCREMENT cho bảng `san_pham`
 --
 ALTER TABLE `san_pham`
-  MODIFY `sp_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `sp_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT cho bảng `slides`
