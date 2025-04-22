@@ -46,6 +46,7 @@ class AdminCommentController
     
         // Gọi view hiển thị danh sách bình luận
         require_once "./views/manageComment/listComment.php";
+        deleteSessionError(); // xóa session sau khi load trang
     }
     
 }

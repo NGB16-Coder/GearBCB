@@ -13,7 +13,6 @@ class AdminOrderController
         $listOrder = $this->modelOrder->getAllOrder();
         // var_dump($listOrder);die;
         require_once "./views/manageOrder/listOrder.php";
-        unset($_SESSION['error']);
         deleteSessionError(); // xóa session sau khi load trang
     }
 

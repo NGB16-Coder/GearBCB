@@ -343,6 +343,8 @@ class HomeController
 
             $this->cart->addToCart($sp_id, $tk_id, $so_luong);
             header('location: '.BASE_URL . '?act=chi-tiet-san-pham&id=' . $sp_id);
+            deleteSessionError();
+            exit;
         }
     }
 }

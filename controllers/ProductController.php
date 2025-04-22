@@ -36,6 +36,7 @@ class ProductController
 
         if ($product) {
             require_once "./views/detailProduct.php";
+            deleteSessionError(); // xóa session sau khi load trang
         } else {
             header('location: ' . BASE_URL.'?act=trang-chu');
         }
@@ -50,6 +51,7 @@ class ProductController
 
         if ($productCategory) {
             require_once "./views/productCategory.php";
+            deleteSessionError(); // xóa session sau khi load trang
         } else {
             header('location: ' . BASE_URL.'?act=trang-chu');
         }

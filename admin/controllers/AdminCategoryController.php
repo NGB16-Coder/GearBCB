@@ -19,6 +19,7 @@ class AdminCategoryController
     {
         // dùng để hiển thị Form nhập
         require_once "./views/manageCategory/addCategory.php";
+        deleteSessionError(); // xóa session sau khi load trang
     }
 
     public function addCategory()
@@ -65,10 +66,12 @@ class AdminCategoryController
         $category = $this->modelCategory->getDetailCategory($dm_id);
         if ($category) {
             require_once "./views/manageCategory/editCategory.php";
-
+            deleteSessionError(); // xóa session sau khi load trang
         } else {
             header('location: ' . BASE_URL_ADMIN . '?act=listCategory');
+            exit;
         }
+        deleteSessionError(); // xóa session sau khi load trang
     }
 
     public function editCategory()
@@ -113,6 +116,7 @@ class AdminCategoryController
             exit();
         } else {
             header('location: '.BASE_URL_ADMIN.'?act=listCategory');
+            exit;
         }
 
     }

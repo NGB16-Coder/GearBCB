@@ -74,6 +74,8 @@ function deleteFile($file)
 // xóa session sau khi load trang
 function deleteSessionError()
 {
+    unset($_SESSION['error']);
+    unset($_SESSION['success']);
     // Kiểm tra session 'flash' có tồn tại không và xóa nó nếu có
     if (isset($_SESSION['flash'])) {
         // hủy session sau khi tải trang

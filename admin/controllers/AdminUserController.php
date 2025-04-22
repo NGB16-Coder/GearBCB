@@ -14,7 +14,7 @@ class AdminUserController
 
         $listUser = $this->modeluser->getAllUser();
         require_once "./views/manageUser/listUser.php";
-
+        deleteSessionError();
     }
 
     public function deleteUser()
@@ -26,7 +26,9 @@ class AdminUserController
             header('location: '.BASE_URL_ADMIN.'?act=listUser');
             exit();
         } else {
-            die;
+            $_SESSION['error'] = "Không tồn tại tài khoản này";
+            header('location: '.BASE_URL_ADMIN.'?act=listUser');
+            exit();
         }
 
     }
@@ -39,7 +41,9 @@ class AdminUserController
             header('location: '.BASE_URL_ADMIN.'?act=listUser');
             exit();
         } else {
-            die;
+            $_SESSION['error'] = "Không tồn tại tài khoản này";
+            header('location: '.BASE_URL_ADMIN.'?act=listUser');
+            exit();
         }
 
     }
@@ -52,7 +56,9 @@ class AdminUserController
             header('location: '.BASE_URL_ADMIN.'?act=listUser');
             exit();
         } else {
-            die;
+            $_SESSION['error'] = "Không tồn tại tài khoản này";
+            header('location: '.BASE_URL_ADMIN.'?act=listUser');
+            exit();
         }
 
     }

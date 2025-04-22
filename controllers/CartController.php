@@ -68,6 +68,7 @@ class CartController
 
         $cartItems = $this->cartModel->getCartItems($tk_id);
         require_once './views/giohang.php';
+        deleteSessionError(); // xóa session sau khi load trang
     }
 
     public function deleteCart()

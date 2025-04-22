@@ -74,6 +74,7 @@ class OrderController
         }
 
         require_once './views/historyOrder.php';
+        deleteSessionError();
     }
 
 
@@ -87,8 +88,11 @@ class OrderController
         // var_dump($productDonHang);die;
         if ($detailDonHang && $productDonHang) {
             require_once "./views/chitietOrder.php";
+            deleteSessionError(); // xóa session sau khi load trang
         } else {
             header('location: ' . BASE_URL . '?act=lich-su-don&id='.$detailDonHang['tk_id']);
+            deleteSessionError();
+            exit;
         }
     }
 
